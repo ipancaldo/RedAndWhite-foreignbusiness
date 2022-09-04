@@ -1,0 +1,14 @@
+D:\Repos\RedAndWhite\RedAndWhite.Domain\bin\Debug\net6.0\RedAndWhite.Domain.deps.json
+D:\Repos\RedAndWhite\RedAndWhite.Domain\bin\Debug\net6.0\RedAndWhite.Domain.dll
+D:\Repos\RedAndWhite\RedAndWhite.Domain\bin\Debug\net6.0\ref\RedAndWhite.Domain.dll
+D:\Repos\RedAndWhite\RedAndWhite.Domain\bin\Debug\net6.0\RedAndWhite.Domain.pdb
+D:\Repos\RedAndWhite\RedAndWhite.Domain\obj\Debug\net6.0\RedAndWhite.Domain.csproj.AssemblyReference.cache
+D:\Repos\RedAndWhite\RedAndWhite.Domain\obj\Debug\net6.0\RedAndWhite.Domain.GeneratedMSBuildEditorConfig.editorconfig
+D:\Repos\RedAndWhite\RedAndWhite.Domain\obj\Debug\net6.0\RedAndWhite.Domain.AssemblyInfoInputs.cache
+D:\Repos\RedAndWhite\RedAndWhite.Domain\obj\Debug\net6.0\RedAndWhite.Domain.AssemblyInfo.cs
+D:\Repos\RedAndWhite\RedAndWhite.Domain\obj\Debug\net6.0\RedAndWhite.Domain.csproj.CoreCompileInputs.cache
+D:\Repos\RedAndWhite\RedAndWhite.Domain\obj\Debug\net6.0\RedAndWhite.Domain.dll
+D:\Repos\RedAndWhite\RedAndWhite.Domain\obj\Debug\net6.0\ref\RedAndWhite.Domain.dll
+D:\Repos\RedAndWhite\RedAndWhite.Domain\obj\Debug\net6.0\RedAndWhite.Domain.pdb
+D:\Repos\RedAndWhite\RedAndWhite.Domain\bin\Debug\net6.0\RedAndWhite.Domain.runtimeconfig.json
+D:\Repos\RedAndWhite\RedAndWhite.Domain\obj\Debug\net6.0\RedAndWhite.Domain.genruntimeconfig.cache

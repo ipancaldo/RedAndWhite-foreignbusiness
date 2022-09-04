@@ -1,0 +1,17 @@
+D:\Repos\RedAndWhite\RedAndWhite.Data\bin\Debug\net6.0\RedAndWhite.Data.deps.json
+D:\Repos\RedAndWhite\RedAndWhite.Data\bin\Debug\net6.0\RedAndWhite.Data.runtimeconfig.json
+D:\Repos\RedAndWhite\RedAndWhite.Data\bin\Debug\net6.0\RedAndWhite.Data.dll
+D:\Repos\RedAndWhite\RedAndWhite.Data\bin\Debug\net6.0\ref\RedAndWhite.Data.dll
+D:\Repos\RedAndWhite\RedAndWhite.Data\bin\Debug\net6.0\RedAndWhite.Data.pdb
+D:\Repos\RedAndWhite\RedAndWhite.Data\bin\Debug\net6.0\RedAndWhite.Domain.dll
+D:\Repos\RedAndWhite\RedAndWhite.Data\bin\Debug\net6.0\RedAndWhite.Domain.pdb
+D:\Repos\RedAndWhite\RedAndWhite.Data\obj\Debug\net6.0\RedAndWhite.Data.csproj.AssemblyReference.cache
+D:\Repos\RedAndWhite\RedAndWhite.Data\obj\Debug\net6.0\RedAndWhite.Data.GeneratedMSBuildEditorConfig.editorconfig
+D:\Repos\RedAndWhite\RedAndWhite.Data\obj\Debug\net6.0\RedAndWhite.Data.AssemblyInfoInputs.cache
+D:\Repos\RedAndWhite\RedAndWhite.Data\obj\Debug\net6.0\RedAndWhite.Data.AssemblyInfo.cs
+D:\Repos\RedAndWhite\RedAndWhite.Data\obj\Debug\net6.0\RedAndWhite.Data.csproj.CoreCompileInputs.cache
+D:\Repos\RedAndWhite\RedAndWhite.Data\obj\Debug\net6.0\RedAndWhite.Data.csproj.CopyComplete
+D:\Repos\RedAndWhite\RedAndWhite.Data\obj\Debug\net6.0\RedAndWhite.Data.dll
+D:\Repos\RedAndWhite\RedAndWhite.Data\obj\Debug\net6.0\ref\RedAndWhite.Data.dll
+D:\Repos\RedAndWhite\RedAndWhite.Data\obj\Debug\net6.0\RedAndWhite.Data.pdb
+D:\Repos\RedAndWhite\RedAndWhite.Data\obj\Debug\net6.0\RedAndWhite.Data.genruntimeconfig.cache

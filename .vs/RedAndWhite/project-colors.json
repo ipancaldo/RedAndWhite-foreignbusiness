@@ -1,0 +1,46 @@
+{
+  "Version": 1,
+  "ProjectMap": {
+    "0f88d390-f69d-4421-be1d-dd77bb3ce417": {
+      "ProjectGuid": "0f88d390-f69d-4421-be1d-dd77bb3ce417",
+      "DisplayName": "RedAndWhite.UI",
+      "ColorIndex": 0
+    },
+    "2340d0f8-88a6-4a5a-86ae-2a525e7cea8e": {
+      "ProjectGuid": "2340d0f8-88a6-4a5a-86ae-2a525e7cea8e",
+      "DisplayName": "RedAndWhite.Model",
+      "ColorIndex": 1
+    },
+    "a915e232-3b41-4aa4-b54f-c15380570074": {
+      "ProjectGuid": "a915e232-3b41-4aa4-b54f-c15380570074",
+      "DisplayName": "RedAndWhite.Domain",
+      "ColorIndex": 2
+    },
+    "3a93dfd7-5ebd-4f57-8bfd-b559ac858e5a": {
+      "ProjectGuid": "3a93dfd7-5ebd-4f57-8bfd-b559ac858e5a",
+      "DisplayName": "RedAndWhite.Repository",
+      "ColorIndex": 3
+    },
+    "4f7f9806-3560-41da-a018-db371e5f20f2": {
+      "ProjectGuid": "4f7f9806-3560-41da-a018-db371e5f20f2",
+      "DisplayName": "RedAndWhite.Service",
+      "ColorIndex": 4
+    },
+    "39683fea-c71b-4897-ab5d-7084cf5cb464": {
+      "ProjectGuid": "39683fea-c71b-4897-ab5d-7084cf5cb464",
+      "DisplayName": "RedAndWhite.Data",
+      "ColorIndex": 5
+    },
+    "a2fe74e1-b743-11d0-ae1a-00a0c90fffc3": {
+      "ProjectGuid": "a2fe74e1-b743-11d0-ae1a-00a0c90fffc3",
+      "DisplayName": "Miscellaneous Files",
+      "ColorIndex": -1
+    },
+    "9d53feba-00a0-4d15-b5bb-ad3a68abbff2": {
+      "ProjectGuid": "9d53feba-00a0-4d15-b5bb-ad3a68abbff2",
+      "DisplayName": "RedAndWhite.API",
+      "ColorIndex": 6
+    }
+  },
+  "NextColorIndex": 7
+}
