@@ -1,5 +1,6 @@
 ﻿using RedAndWhite.Domain;
 using RedAndWhite.Repository.Products;
+using System.Linq.Expressions;
 
 namespace RedAndWhite.Service.Products
 {
@@ -9,5 +10,11 @@ namespace RedAndWhite.Service.Products
             : base(repository)
         {
         }
+
+        public Product GetProductById(int id)
+        {
+            return base.Repository.GetEntityByCriteria(GetById(id));
+        }
+        private Expression<Func<Product, bool>> GetById(int id) => user => user.Id == id;
     }
 }

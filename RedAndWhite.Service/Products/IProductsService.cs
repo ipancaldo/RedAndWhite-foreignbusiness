@@ -4,5 +4,6 @@ namespace RedAndWhite.Service.Products
 {
     public interface IProductsService : IServiceBase<Product>
     {
+        Product GetProductById(int id);
     }
 }

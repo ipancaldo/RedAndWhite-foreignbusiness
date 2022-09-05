@@ -1,5 +1,6 @@
 ﻿using RedAndWhite.Domain;
 using RedAndWhite.Repository;
+using System.Linq.Expressions;
 
 namespace RedAndWhite.Service
 {

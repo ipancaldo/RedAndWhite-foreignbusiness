@@ -1,6 +1,7 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using RedAndWhite.Data;
 using RedAndWhite.Domain;
+using System.Linq.Expressions;
 
 namespace RedAndWhite.Repository
 {
@@ -18,6 +19,11 @@ namespace RedAndWhite.Repository
         }
 
         public IEnumerable<TDomain> GetAll() => this.DbSet.AsEnumerable<TDomain>();
+        
         public void Add(TDomain entity) => this._redAndWhiteContext.Add(entity);
+
+        public TDomain GetEntityByCriteria(Expression<Func<TDomain, bool>> predicate) => this.DbSet.FirstOrDefault(predicate);
+
+        public void SaveChanges() => this._redAndWhiteContext.SaveChanges();
     }
 }

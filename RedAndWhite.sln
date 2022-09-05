@@ -15,8 +15,6 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "RedAndWhite.Service", "RedA
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "RedAndWhite.Data", "RedAndWhite.Data\RedAndWhite.Data.csproj", "{39683FEA-C71B-4897-AB5D-7084CF5CB464}"
 EndProject
-Project("{00D1A9C2-B5F0-4AF3-8072-F6C62B433612}") = "RedAndWhite.Database", "RedAndWhite.Database\RedAndWhite.Database.sqlproj", "{A59F9100-F5F6-4193-A50C-41AB3E859F88}"
-EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -47,12 +45,6 @@ Global
 		{39683FEA-C71B-4897-AB5D-7084CF5CB464}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{39683FEA-C71B-4897-AB5D-7084CF5CB464}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{39683FEA-C71B-4897-AB5D-7084CF5CB464}.Release|Any CPU.Build.0 = Release|Any CPU
-		{A59F9100-F5F6-4193-A50C-41AB3E859F88}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{A59F9100-F5F6-4193-A50C-41AB3E859F88}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{A59F9100-F5F6-4193-A50C-41AB3E859F88}.Debug|Any CPU.Deploy.0 = Debug|Any CPU
-		{A59F9100-F5F6-4193-A50C-41AB3E859F88}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{A59F9100-F5F6-4193-A50C-41AB3E859F88}.Release|Any CPU.Build.0 = Release|Any CPU
-		{A59F9100-F5F6-4193-A50C-41AB3E859F88}.Release|Any CPU.Deploy.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

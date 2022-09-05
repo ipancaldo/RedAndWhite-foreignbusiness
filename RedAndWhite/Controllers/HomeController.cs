@@ -19,6 +19,8 @@ namespace RedAndWhite.Controllers
 
         public IActionResult Index()
         {
+            var testProduct = this._productsService.GetProductById(1);
+
             return View(this._productsService.GetAll().ToList());
 
             //return View(); // Estaba esto sólo
