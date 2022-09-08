@@ -7,7 +7,8 @@ namespace RedAndWhite.Data
     {
         public static IServiceCollection AddData(this IServiceCollection services, string connectionString)
         {
-            services.AddDbContext<RedAndWhiteContext>(options => SqlServerDbContextOptionsExtensions.UseSqlServer(options, connectionString));
+            services.AddDbContext<RedAndWhiteContext>(options => SqlServerDbContextOptionsExtensions.UseSqlServer(options, connectionString)
+                                                                                                    .UseLazyLoadingProxies());
 
             return services;
         }

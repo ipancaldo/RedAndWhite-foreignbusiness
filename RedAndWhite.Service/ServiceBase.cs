@@ -21,5 +21,10 @@ namespace RedAndWhite.Service
         {
             return this.Repository.GetAll();
         }
+
+        public IEnumerable<TDomain> GetEntityListByCriteria(Expression<Func<TDomain, bool>> predicate)
+        {
+            return this.Repository.GetEntityListByCriteria(predicate);
+        }
     }
 }
