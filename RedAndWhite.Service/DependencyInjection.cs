@@ -9,8 +9,8 @@ namespace RedAndWhite.Service
     {
         public static IServiceCollection AddService(this IServiceCollection services)
         {
-            services.AddScoped<IProductsService, ProductsService>();
-            services.RegisterAsImplementedInterfaces<BrandsService>(ServiceLifetime.Scoped);
+            services.AddScoped<IProductService, ProductService>();
+            services.RegisterAsImplementedInterfaces<BrandService>(ServiceLifetime.Scoped);
 
             return services;
         }

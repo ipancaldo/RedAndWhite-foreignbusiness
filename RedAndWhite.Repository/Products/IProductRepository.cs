@@ -2,7 +2,7 @@
 
 namespace RedAndWhite.Repository.Products
 {
-    public interface IProductsRepository : IBaseRepository<Product>
+    public interface IProductRepository : IBaseRepository<Product>
     {
     }
 }

@@ -3,9 +3,9 @@ using RedAndWhite.Domain;
 
 namespace RedAndWhite.Repository.Products
 {
-    public class ProductsRepository : BaseRepository<Product>, IProductsRepository
+    public class ProductRepository : BaseRepository<Product>, IProductRepository
     {
-        public ProductsRepository(RedAndWhiteContext redAndWhiteContext) 
+        public ProductRepository(RedAndWhiteContext redAndWhiteContext) 
             : base(redAndWhiteContext)
         {
 

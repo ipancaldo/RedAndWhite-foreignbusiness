@@ -3,7 +3,7 @@ using RedAndWhite.Model.Products;
 
 namespace RedAndWhite.Service.Products
 {
-    public interface IProductsService : IServiceBase<Product>
+    public interface IProductService : IServiceBase<Product>
     {
         Product GetProductById(int id);
 

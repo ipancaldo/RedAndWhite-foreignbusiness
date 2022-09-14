@@ -2,7 +2,7 @@
 
 namespace RedAndWhite.Repository.Brands
 {
-    public interface IBrandsRepository : IBaseRepository<Brand>
+    public interface IBrandRepository : IBaseRepository<Brand>
     {
     }
 }

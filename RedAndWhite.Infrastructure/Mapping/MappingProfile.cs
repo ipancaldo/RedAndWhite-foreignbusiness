@@ -20,7 +20,7 @@ namespace RedAndWhite.Infrastructure.Mapping
         {
             var types = assembly.GetExportedTypes()
                                 .Where(t => t.GetInterfaces().Any(i => i.IsGenericType &&
-                                                                      i.GetGenericTypeDefinition() == typeof(IMapFrom<>)))
+                                                                       i.GetGenericTypeDefinition() == typeof(IMapFrom<>)))
                                 .ToList();
 
             foreach(var type in types)

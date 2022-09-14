@@ -3,9 +3,9 @@ using RedAndWhite.Domain;
 
 namespace RedAndWhite.Repository.Brands
 {
-    public class BrandsRepository : BaseRepository<Brand>, IBrandsRepository
+    public class BrandRepository : BaseRepository<Brand>, IBrandRepository
     {
-        public BrandsRepository(RedAndWhiteContext redAndWhiteContext) 
+        public BrandRepository(RedAndWhiteContext redAndWhiteContext) 
             : base(redAndWhiteContext)
         {
         }

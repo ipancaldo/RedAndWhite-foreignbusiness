@@ -10,10 +10,10 @@ namespace RedAndWhite.Controllers
     public class HomeController : Controller
     {
         private readonly ILogger<HomeController> _logger;
-        private readonly IProductsService _productsService;
+        private readonly IProductService _productsService;
 
         public HomeController(ILogger<HomeController> logger,
-                              IProductsService productsService)
+                              IProductService productsService)
         {
             this._logger = logger;
             this._productsService = productsService;

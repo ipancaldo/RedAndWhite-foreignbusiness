@@ -2,7 +2,7 @@
 
 namespace RedAndWhite.Service.Brands
 {
-    public interface IBrandsService : IServiceBase<Brand>
+    public interface IBrandService : IServiceBase<Brand>
     {
         Brand GetOrCreateBrandByName(string brandName);
     }

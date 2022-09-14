@@ -8,8 +8,8 @@ namespace RedAndWhite.Repository
     {
         public static IServiceCollection AddRepository(this IServiceCollection services)
         {
-            services.AddScoped<IProductsRepository, ProductsRepository>();
-            services.AddScoped<IBrandsRepository, BrandsRepository>();
+            services.AddScoped<IProductRepository, ProductRepository>();
+            services.AddScoped<IBrandRepository, BrandRepository>();
 
             return services;
         }

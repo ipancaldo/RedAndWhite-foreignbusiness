@@ -6,9 +6,9 @@ using System.Linq.Expressions;
 
 namespace RedAndWhite.Service.Brands
 {
-    public class BrandsService : ServiceBase<Brand, IBrandsRepository>, IBrandsService, IBrandDomainService
+    public class BrandService : ServiceBase<Brand, IBrandRepository>, IBrandService, IBrandDomainService
     {
-        public BrandsService(IBrandsRepository repository,
+        public BrandService(IBrandRepository repository,
                              IMapper mapper) 
             : base(repository, mapper)
         {

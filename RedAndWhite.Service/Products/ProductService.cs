@@ -8,11 +8,11 @@ using System.Linq.Expressions;
 
 namespace RedAndWhite.Service.Products
 {
-    public class ProductsService : ServiceBase<Product, IProductsRepository>, IProductsService
+    public class ProductService : ServiceBase<Product, IProductRepository>, IProductService
     {
         private readonly IBrandDomainService _brandDomainService;
 
-        public ProductsService(IProductsRepository repository,
+        public ProductService(IProductRepository repository,
                                IBrandDomainService brandDomainService,
                                IMapper mapper) 
             : base(repository, mapper)
