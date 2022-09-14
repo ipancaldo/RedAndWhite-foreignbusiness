@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using RedAndWhite.Model.Products;
 using RedAndWhite.Models;
 using RedAndWhite.Service.Brands;
 using RedAndWhite.Service.Products;
@@ -20,11 +21,24 @@ namespace RedAndWhite.Controllers
 
         public IActionResult Index()
         {
-            this._productsService.AssignBrand("Test brand name", 1);
+            try
+            {
+                NewProductModel newProductModel = new NewProductModel()
+                {
+                    Name = "Test Name",
+                    Description = "TestDescription"
+                };
+                this._productsService.Create(newProductModel);
 
+                var testProduct = this._productsService.GetProductById(1);
+                return View(this._productsService.GetAll().ToList());
 
-            var testProduct = this._productsService.GetProductById(1);
-            return View(this._productsService.GetAll().ToList());
+                this._productsService.AssignBrand("Ani", 1);
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
         }
 
         public IActionResult Privacy()

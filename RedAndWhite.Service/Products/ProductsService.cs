@@ -1,5 +1,8 @@
-﻿using RedAndWhite.Domain;
+﻿using AutoMapper;
+using RedAndWhite.Domain;
 using RedAndWhite.Domain.DomainServices;
+using RedAndWhite.Domain.ValueObjects;
+using RedAndWhite.Model.Products;
 using RedAndWhite.Repository.Products;
 using System.Linq.Expressions;
 
@@ -10,17 +13,30 @@ namespace RedAndWhite.Service.Products
         private readonly IBrandDomainService _brandDomainService;
 
         public ProductsService(IProductsRepository repository,
-                               IBrandDomainService brandDomainService) 
-            : base(repository)
+                               IBrandDomainService brandDomainService,
+                               IMapper mapper) 
+            : base(repository, mapper)
         {
             this._brandDomainService = brandDomainService;
         }
 
         public Product GetProductById(int id)
         {
-            return base.Repository.GetEntityByCriteria(GetById(id));
+            return base.Repository.GetEntityByCriteria(GetByIdExpression(id));
         }
-        private Expression<Func<Product, bool>> GetById(int id) => user => user.Id == id;
+        private Expression<Func<Product, bool>> GetByIdExpression(int id) => user => user.Id == id;
+
+        public void Create(NewProductModel newProductModel)
+        {
+            var product = base.Repository.GetEntityByCriteria(GetByNameExpression(newProductModel.Name));
+            if (product is not null)
+                return;
+
+            this.Aggregate.Create(base.Mapper.Map<NewProduct>(newProductModel));
+            base.Repository.Add(this.Aggregate);
+            base.Repository.SaveChanges();
+        }
+        private Expression<Func<Product, bool>> GetByNameExpression(string productName) => product => product.Name == productName;
 
         public void AssignBrand(string brandName, int productId)
         {

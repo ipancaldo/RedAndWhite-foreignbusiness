@@ -1,6 +1,8 @@
 ﻿using RedAndWhite.Data;
+using RedAndWhite.Infrastructure;
 using RedAndWhite.Repository;
 using RedAndWhite.Service;
+using System.Reflection;
 
 namespace RedAndWhite.UI
 {
@@ -20,6 +22,12 @@ namespace RedAndWhite.UI
         {
             // Add services to the container.
             builder.Services.AddControllersWithViews();
+
+            var assembliesToLoad = Assembly.GetExecutingAssembly()
+                                           .GetReferencedAssemblies()
+                                           .Select(a => Assembly.Load(a))
+                                           .ToList();
+            builder.Services.AddInfrastructure(assembliesToLoad.ToArray());
 
             builder.Services.AddData(builder.Configuration["ConnectionString"]);
             builder.Services.AddRepository();

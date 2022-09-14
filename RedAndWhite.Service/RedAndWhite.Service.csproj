@@ -14,6 +14,8 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\RedAndWhite.Infrastructure\RedAndWhite.Infrastructure.csproj" />
+    <ProjectReference Include="..\RedAndWhite.Model\RedAndWhite.Model.csproj" />
     <ProjectReference Include="..\RedAndWhite.Repository\RedAndWhite.Repository.csproj" />
   </ItemGroup>
 

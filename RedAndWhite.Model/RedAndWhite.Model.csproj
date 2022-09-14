@@ -13,4 +13,9 @@
     </PackageReference>
   </ItemGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\RedAndWhite.Domain\RedAndWhite.Domain.csproj" />
+    <ProjectReference Include="..\RedAndWhite.Infrastructure\RedAndWhite.Infrastructure.csproj" />
+  </ItemGroup>
+
 </Project>

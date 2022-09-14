@@ -1,4 +1,5 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿using RedAndWhite.Domain.ValueObjects;
+using System.ComponentModel.DataAnnotations;
 
 namespace RedAndWhite.Domain
 {
@@ -13,17 +14,23 @@ namespace RedAndWhite.Domain
         [Key]
         public int Id { get; set; }
 
-        [Required]
-        public string Name { get; set; }
+        [Required, MaxLength(150)]
+        public string Name { get; private set; }
 
-        [Required]
-        public string Description { get; set; }
+        [Required, MaxLength(200)]
+        public string Description { get; private set; }
 
         public byte[]? Image { get; set; }
 
-        public virtual List<Category> Categories { get; set; }
+        public virtual List<Category> Categories { get; private set; }
 
-        public virtual List<Brand> Brands { get; set; }
+        public virtual List<Brand> Brands { get; private set; }
+
+        public void Create(NewProduct newProduct)
+        {
+            this.Name = newProduct.Name;
+            this.Description = newProduct.Description;
+        }
 
         public void AssignBrand(Brand brand)
         {

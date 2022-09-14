@@ -7,7 +7,7 @@ namespace RedAndWhite.Domain
         [Key]
         public int Id { get; set; }
 
-        [Required]
+        [Required, MaxLength(150)]
         public string Name { get; set; }
 
         public virtual List<Product> Products { get; set; }

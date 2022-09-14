@@ -7,7 +7,7 @@ namespace RedAndWhite.Domain
         [Key]
         public int Id { get; set; }
 
-        [Required]
+        [Required, MaxLength(100)]
         public string Title { get; set; }
 
         [Required]

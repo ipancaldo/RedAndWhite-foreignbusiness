@@ -1,4 +1,5 @@
-﻿using RedAndWhite.Domain;
+﻿using AutoMapper;
+using RedAndWhite.Domain;
 using RedAndWhite.Repository;
 using System.Linq.Expressions;
 
@@ -10,11 +11,14 @@ namespace RedAndWhite.Service
     {
         protected TRepository Repository;
         protected TDomain Aggregate;
+        protected readonly IMapper Mapper;
 
-        public ServiceBase(TRepository repository)
+        public ServiceBase(TRepository repository,
+                           IMapper mapper)
         {
             this.Aggregate = (TDomain)Activator.CreateInstance(typeof(TDomain))!;
             this.Repository = repository;
+            this.Mapper = mapper;
         }
 
         public IEnumerable<TDomain> GetAll()

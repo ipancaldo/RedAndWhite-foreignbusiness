@@ -1,4 +1,5 @@
-﻿using RedAndWhite.Domain;
+﻿using AutoMapper;
+using RedAndWhite.Domain;
 using RedAndWhite.Domain.DomainServices;
 using RedAndWhite.Repository.Brands;
 using System.Linq.Expressions;
@@ -7,8 +8,9 @@ namespace RedAndWhite.Service.Brands
 {
     public class BrandsService : ServiceBase<Brand, IBrandsRepository>, IBrandsService, IBrandDomainService
     {
-        public BrandsService(IBrandsRepository repository) 
-            : base(repository)
+        public BrandsService(IBrandsRepository repository,
+                             IMapper mapper) 
+            : base(repository, mapper)
         {
         }
 
