@@ -14,7 +14,7 @@ namespace RedAndWhite.Service.Products
 
         public ProductService(IProductRepository repository,
                                IBrandDomainService brandDomainService,
-                               IMapper mapper) 
+                               IMapper mapper)
             : base(repository, mapper)
         {
             this._brandDomainService = brandDomainService;
@@ -36,7 +36,17 @@ namespace RedAndWhite.Service.Products
             base.Repository.Add(this.Aggregate);
             base.Repository.SaveChanges();
         }
-        private Expression<Func<Product, bool>> GetByNameExpression(string productName) => product => product.Name == productName;
+        private Expression<Func<Product, bool>> GetByNameExpression(string productName) => product => product.Name.ToLower() == productName.ToLower();
+
+        public void EditProduct(ModifyPropertiesProduct modifyPropertiesProduct)
+        {
+            var product = GetProductById(modifyPropertiesProduct.Id);
+            if (product is null)
+                return;
+
+            product.ModifyProperties(modifyPropertiesProduct);
+            base.Repository.SaveChanges();
+        }
 
         public void AssignBrand(string brandName, int productId)
         {

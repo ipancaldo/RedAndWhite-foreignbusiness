@@ -1,0 +1,16 @@
+﻿using System.ComponentModel.DataAnnotations;
+
+namespace RedAndWhite.Domain.ValueObjects
+{
+    public class ModifyPropertiesProduct
+    {
+        [Required]
+        public int Id { get; set; }
+
+        public string Name { get; set; }
+
+        public string Description { get; set; }
+
+        public byte[] Image { get; set; }
+    }
+}

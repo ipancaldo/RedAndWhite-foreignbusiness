@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using RedAndWhite.Domain.ValueObjects;
 using RedAndWhite.Model.Products;
 using RedAndWhite.Models;
 using RedAndWhite.Service.Brands;
@@ -23,12 +24,8 @@ namespace RedAndWhite.Controllers
         {
             try
             {
-                NewProductModel newProductModel = new NewProductModel()
-                {
-                    Name = "Test Name",
-                    Description = "TestDescription"
-                };
-                this._productsService.Create(newProductModel);
+                //TestCreateProduct();
+                TestModifyProduct();
 
                 var testProduct = this._productsService.GetProductById(1);
                 return View(this._productsService.GetAll().ToList());
@@ -50,6 +47,35 @@ namespace RedAndWhite.Controllers
         public IActionResult Error()
         {
             return View(new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
+        }
+
+
+
+
+
+
+
+        //---------------------------------------
+        //Tests
+        private void TestCreateProduct()
+        {
+            NewProductModel newProductModel = new NewProductModel()
+            {
+                Name = "Test Name",
+                Description = "TestDescription"
+            };
+            this._productsService.Create(newProductModel);
+        }
+
+        private void TestModifyProduct()
+        {
+            ModifyPropertiesProduct modifyPropertiesProduct = new ModifyPropertiesProduct()
+            {
+                Id = 2,
+                Name = "New test name",
+                Description = null
+            };
+            this._productsService.EditProduct(modifyPropertiesProduct);
         }
     }
 }

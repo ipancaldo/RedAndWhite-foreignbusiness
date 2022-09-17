@@ -32,6 +32,21 @@ namespace RedAndWhite.Domain
             this.Description = newProduct.Description;
         }
 
+        public void ModifyProperties(ModifyPropertiesProduct modifyPropertiesProduct)
+        {
+            if (this.Name.ToLower() != modifyPropertiesProduct.Name.ToLower() &&
+                !string.IsNullOrEmpty(modifyPropertiesProduct.Name))
+                this.Name = modifyPropertiesProduct.Name;
+
+            if (this.Description.ToLower() != modifyPropertiesProduct.Description.ToLower() &&
+                !string.IsNullOrEmpty(modifyPropertiesProduct.Description))
+                this.Description = modifyPropertiesProduct.Description;
+
+            if (this.Image != modifyPropertiesProduct.Image &&
+                modifyPropertiesProduct.Image is not null)
+                this.Image = modifyPropertiesProduct.Image;
+        }
+
         public void AssignBrand(Brand brand)
         {
             var isBrandInProduct = Brands.Any(b => b.Name == brand.Name);
