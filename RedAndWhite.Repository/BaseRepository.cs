@@ -24,6 +24,8 @@ namespace RedAndWhite.Repository
         
         public void Add(TDomain entity) => this._redAndWhiteContext.Add(entity);
 
+        public void Delete(TDomain entity) => this.DbSet.Remove(entity);
+
         public TDomain GetEntityByCriteria(Expression<Func<TDomain, bool>> predicate) => this.DbSet.FirstOrDefault(predicate);
 
         public void SaveChanges() => this._redAndWhiteContext.SaveChanges();

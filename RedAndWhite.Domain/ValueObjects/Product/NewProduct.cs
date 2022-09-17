@@ -1,6 +1,6 @@
-﻿namespace RedAndWhite.Domain.ValueObjects
+﻿namespace RedAndWhite.Domain.ValueObjects.Product
 {
-    public class NewProduct
+    public class NewProduct : ValueObject
     {
         public string Name { get; set; }
 

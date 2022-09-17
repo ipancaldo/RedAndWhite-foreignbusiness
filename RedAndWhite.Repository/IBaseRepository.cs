@@ -7,6 +7,7 @@ namespace RedAndWhite.Repository
         IEnumerable<TDomain> GetAll();
         IEnumerable<TDomain> GetEntityListByCriteria(Expression<Func<TDomain, bool>> predicate);
         void Add(TDomain entity);
+        void Delete(TDomain entity);
         TDomain GetEntityByCriteria(Expression<Func<TDomain, bool>> predicate);
         void SaveChanges();
     }

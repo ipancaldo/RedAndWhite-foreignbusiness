@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
-using RedAndWhite.Domain.ValueObjects;
+using RedAndWhite.Domain.ValueObjects.Brand;
+using RedAndWhite.Domain.ValueObjects.Product;
 using RedAndWhite.Model.Products;
 using RedAndWhite.Models;
 using RedAndWhite.Service.Brands;
@@ -12,25 +13,24 @@ namespace RedAndWhite.Controllers
     {
         private readonly ILogger<HomeController> _logger;
         private readonly IProductService _productsService;
+        private readonly IBrandService _brandService;
 
         public HomeController(ILogger<HomeController> logger,
-                              IProductService productsService)
+                              IProductService productsService,
+                              IBrandService brandService)
         {
             this._logger = logger;
             this._productsService = productsService;
+            this._brandService = brandService;
         }
 
         public IActionResult Index()
         {
             try
             {
-                //TestCreateProduct();
-                TestModifyProduct();
 
                 var testProduct = this._productsService.GetProductById(1);
                 return View(this._productsService.GetAll().ToList());
-
-                this._productsService.AssignBrand("Ani", 1);
             }
             catch (Exception ex)
             {
@@ -75,7 +75,27 @@ namespace RedAndWhite.Controllers
                 Name = "New test name",
                 Description = null
             };
-            this._productsService.EditProduct(modifyPropertiesProduct);
+            this._productsService.Modify(modifyPropertiesProduct);
+        }
+
+       private void TestDeleteProduct(int id)
+        {
+            this._productsService.Delete(id);
+        }
+
+        private void TestAssignBrand(string brandName, int id)
+        {
+            this._productsService.AssignBrand(brandName, id);
+        }
+
+        private void TestCreateNewBrand(string brandName)
+        {
+            this._brandService.Create(new NewBrand(brandName));
+        }
+
+        private void TestDeleteBrand(int id)
+        {
+            this._brandService.Delete(id);
         }
     }
 }

@@ -1,5 +1,5 @@
-﻿using System.ComponentModel.DataAnnotations;
-using System.Dynamic;
+﻿using RedAndWhite.Domain.ValueObjects.Brand;
+using System.ComponentModel.DataAnnotations;
 
 namespace RedAndWhite.Domain
 {
@@ -21,9 +21,9 @@ namespace RedAndWhite.Domain
 
         public virtual List<Category> Categories { get; set; }
 
-        public void Create(string brandName)
+        public void Create(NewBrand newBrand)
         {
-            this.Name = brandName;
+            this.Name = newBrand.Name;
         }
     }
 }

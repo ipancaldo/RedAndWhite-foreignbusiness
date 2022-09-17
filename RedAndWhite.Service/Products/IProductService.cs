@@ -1,5 +1,5 @@
 ﻿using RedAndWhite.Domain;
-using RedAndWhite.Domain.ValueObjects;
+using RedAndWhite.Domain.ValueObjects.Product;
 using RedAndWhite.Model.Products;
 
 namespace RedAndWhite.Service.Products
@@ -10,7 +10,9 @@ namespace RedAndWhite.Service.Products
 
         void Create(NewProductModel newProductModel);
 
-        void EditProduct(ModifyPropertiesProduct modifyPropertiesProduct);
+        void Modify(ModifyPropertiesProduct modifyPropertiesProduct);
+
+        void Delete(int id);
 
         void AssignBrand(string brandName, int productId);
     }

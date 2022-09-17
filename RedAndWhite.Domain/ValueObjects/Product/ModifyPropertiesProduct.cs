@@ -1,8 +1,8 @@
 ﻿using System.ComponentModel.DataAnnotations;
 
-namespace RedAndWhite.Domain.ValueObjects
+namespace RedAndWhite.Domain.ValueObjects.Product
 {
-    public class ModifyPropertiesProduct
+    public class ModifyPropertiesProduct : ValueObject
     {
         [Required]
         public int Id { get; set; }

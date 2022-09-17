@@ -1,7 +1,9 @@
-﻿namespace RedAndWhite.Domain.DomainServices
+﻿using RedAndWhite.Domain.ValueObjects.Brand;
+
+namespace RedAndWhite.Domain.DomainServices
 {
     public interface IBrandDomainService : IDomainService
     {
-        Brand GetOrCreateBrandByName(string brandName);
+        Brand GetOrCreateBrandByName(NewBrand newBrand);
     }
 }

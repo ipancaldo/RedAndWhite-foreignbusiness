@@ -1,4 +1,4 @@
-﻿using RedAndWhite.Domain.ValueObjects;
+﻿using RedAndWhite.Domain.ValueObjects.Product;
 using System.ComponentModel.DataAnnotations;
 
 namespace RedAndWhite.Domain
