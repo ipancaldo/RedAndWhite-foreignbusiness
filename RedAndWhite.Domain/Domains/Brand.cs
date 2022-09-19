@@ -25,5 +25,10 @@ namespace RedAndWhite.Domain
         {
             this.Name = newBrand.Name;
         }
+
+        public void Modify(ModifyPropertiesBrand modifyPropertiesBrand)
+        {
+            this.Name = modifyPropertiesBrand.Name;
+        }
     }
 }

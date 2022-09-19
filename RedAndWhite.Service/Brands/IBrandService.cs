@@ -9,7 +9,7 @@ namespace RedAndWhite.Service.Brands
 
         void Create(NewBrand newBrand);
 
-        void Modify();
+        void Modify(ModifyPropertiesBrand modifyPropertiesBrand);
 
         void Delete(int id);
     }

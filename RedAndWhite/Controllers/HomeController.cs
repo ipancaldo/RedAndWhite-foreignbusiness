@@ -6,6 +6,7 @@ using RedAndWhite.Models;
 using RedAndWhite.Service.Brands;
 using RedAndWhite.Service.Products;
 using System.Diagnostics;
+using System.Xml.Linq;
 
 namespace RedAndWhite.Controllers
 {
@@ -28,6 +29,8 @@ namespace RedAndWhite.Controllers
         {
             try
             {
+                TestModifyBrand(3, "Test modify name");
+
 
                 var testProduct = this._productsService.GetProductById(1);
                 return View(this._productsService.GetAll().ToList());
@@ -96,6 +99,16 @@ namespace RedAndWhite.Controllers
         private void TestDeleteBrand(int id)
         {
             this._brandService.Delete(id);
+        }
+
+        private void TestModifyBrand(int id, string name)
+        {
+            ModifyPropertiesBrand modifyPropertiesBrand = new ModifyPropertiesBrand()
+            {
+                Id = id,
+                Name = name
+            };
+            this._brandService.Modify(modifyPropertiesBrand);
         }
     }
 }

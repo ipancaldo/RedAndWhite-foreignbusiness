@@ -43,9 +43,14 @@ namespace RedAndWhite.Service.Brands
         }
         private Expression<Func<Brand, bool>> GetByNameEvaluator(string brandName) => brand => brand.Name.ToLower() == brandName.ToLower();
 
-        public void Modify()
+        public void Modify(ModifyPropertiesBrand modifyPropertiesBrand)
         {
-            throw new NotImplementedException();
+            var brand = GetBrandById(modifyPropertiesBrand.Id);
+            if (brand == null)
+                throw new Exception("Brand don't exist.");
+
+            brand.Modify(modifyPropertiesBrand);
+            base.Repository.SaveChanges();
         }
 
         public void Delete(int id)
