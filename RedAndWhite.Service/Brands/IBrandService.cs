@@ -5,9 +5,9 @@ namespace RedAndWhite.Service.Brands
 {
     public interface IBrandService : IServiceBase<Brand>
     {
-        Brand GetBrandById(int id);
-
         void Create(NewBrand newBrand);
+
+        Brand GetById(int id);
 
         void Modify(ModifyPropertiesBrand modifyPropertiesBrand);
 

@@ -1,5 +1,6 @@
 ﻿using RedAndWhite.Domain.ValueObjects.Product;
 using System.ComponentModel.DataAnnotations;
+using System.Linq;
 
 namespace RedAndWhite.Domain
 {
@@ -49,10 +50,26 @@ namespace RedAndWhite.Domain
 
         public void AssignBrand(Brand brand)
         {
-            var isBrandInProduct = Brands.Any(b => b.Name == brand.Name);
+            var isBrandInProduct = this.Brands.Any(b => b.Name == brand.Name);
             if (isBrandInProduct) return;
 
             Brands.Add(brand);
+        }
+
+        public void AddBrand(Brand brand)
+        {
+            var isBrandAlreadyAssigned = this.Brands.Any(b => b.Name == brand.Name);
+            if(isBrandAlreadyAssigned) return;
+
+            this.Brands.Add(brand);
+        }
+
+        public void RemoveBrand(Brand brand)
+        {
+            var brandInProduct = this.Brands.FirstOrDefault(b => b.Name == brand.Name);
+            if (brandInProduct is default(Brand)) return;
+
+            this.Brands.Remove(brandInProduct!);
         }
     }
 }

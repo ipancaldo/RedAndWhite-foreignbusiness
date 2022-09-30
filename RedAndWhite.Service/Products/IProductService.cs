@@ -10,9 +10,13 @@ namespace RedAndWhite.Service.Products
 
         void Create(NewProductModel newProductModel);
 
-        void Modify(ModifyPropertiesProduct modifyPropertiesProduct);
-
         void Delete(int id);
+
+        void ModifyProperties(ModifyPropertiesProduct modifyPropertiesProduct);
+
+        void AddBrand(AddOrRemoveProductBrandModel addProductBrandModel);
+
+        void RemoveBrand(AddOrRemoveProductBrandModel addProductBrandModel);
 
         void AssignBrand(string brandName, int productId);
 

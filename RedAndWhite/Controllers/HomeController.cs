@@ -7,7 +7,6 @@ using RedAndWhite.Models;
 using RedAndWhite.Service.Brands;
 using RedAndWhite.Service.Products;
 using System.Diagnostics;
-using System.Xml.Linq;
 
 namespace RedAndWhite.Controllers
 {
@@ -30,10 +29,10 @@ namespace RedAndWhite.Controllers
         {
             try
             {
+                TestRemoveBrand(3, 2);
 
-                var testProduct = this._productsService.GetProductById(1);
-                return View(TestOrderByProduct());
-                //return View(this._productsService.GetAll().ToList());
+                //return View(TestOrderByProduct());
+                return View(this._productsService.GetAll().ToList());
             }
             catch (Exception ex)
             {
@@ -78,7 +77,7 @@ namespace RedAndWhite.Controllers
                 Name = "New test name",
                 Description = null
             };
-            this._productsService.Modify(modifyPropertiesProduct);
+            this._productsService.ModifyProperties(modifyPropertiesProduct);
         }
 
         private void TestDeleteProduct(int id)
@@ -119,6 +118,26 @@ namespace RedAndWhite.Controllers
         private List<Brand> TestOrderByBrand()
         {
             return this._brandService.OrderBy();
+        }
+
+        private void TestAddBrand(int productId, int brandId)
+        {
+            AddOrRemoveProductBrandModel addProductBrandModel = new AddOrRemoveProductBrandModel()
+            {
+                ProductId = productId,
+                BrandId = brandId
+            };
+            this._productsService.AddBrand(addProductBrandModel);
+        }        
+        
+        private void TestRemoveBrand(int productId, int brandId)
+        {
+            AddOrRemoveProductBrandModel removeProductBrandModel = new AddOrRemoveProductBrandModel()
+            {
+                ProductId = productId,
+                BrandId = brandId
+            };
+            this._productsService.RemoveBrand(removeProductBrandModel);
         }
     }
 }

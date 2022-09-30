@@ -4,6 +4,9 @@ namespace RedAndWhite.Domain.DomainServices
 {
     public interface IBrandDomainService : IDomainService
     {
-        Brand GetOrCreateBrandByName(NewBrand newBrand);
+        Brand GetOrCreateByName(NewBrand newBrand);
+
+        Brand GetById(GetBrandById id);
+        //Brand GetByIds(GetBrandsById id);
     }
 }

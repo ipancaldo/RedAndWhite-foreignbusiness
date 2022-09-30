@@ -15,7 +15,7 @@ namespace RedAndWhite.Service.Brands
         {
         }
 
-        public Brand GetOrCreateBrandByName(NewBrand newBrand)
+        public Brand GetOrCreateByName(NewBrand newBrand)
         {
             var brand = base.Repository.GetEntityByCriteria(NameEvaluator(newBrand.Name));
             if (brand != null) return brand;
@@ -25,11 +25,23 @@ namespace RedAndWhite.Service.Brands
         }
         private Expression<Func<Brand, bool>> NameEvaluator(string a) => b => b.Name == a;
 
-        public Brand GetBrandById(int id)
+        
+        public Brand GetById(int id)
         {
             return base.Repository.GetEntityByCriteria(GetByIdExpression(id));
         }
         private Expression<Func<Brand, bool>> GetByIdExpression(int id) => brand => brand.Id.Equals(id);
+
+        public Brand GetById(GetBrandById id)
+        {
+            return base.Repository.GetEntityByCriteria(GetByIdExpression(id.BrandId));
+        }
+
+        //public List<Brand> GetByIds(GetBrandsById id)
+        //{
+        //    return base.Repository.GetEntityListByCriteria(GetByIdsExpression(id.BrandIds)).ToList();
+        //}
+        //private Expression<Func<Brand, bool>> GetByIdsExpression(List<int> ids) => brand => ids.Any(b => brand.Id == b);                
 
         public void Create(NewBrand newBrand)
         {
@@ -45,7 +57,7 @@ namespace RedAndWhite.Service.Brands
 
         public void Modify(ModifyPropertiesBrand modifyPropertiesBrand)
         {
-            var brand = GetBrandById(modifyPropertiesBrand.Id);
+            var brand = GetById(modifyPropertiesBrand.Id);
             if (brand == null)
                 throw new Exception("Brand don't exist.");
 
@@ -55,7 +67,7 @@ namespace RedAndWhite.Service.Brands
 
         public void Delete(int id)
         {
-            var brand = GetBrandById(id);
+            var brand = GetById(id);
             if (brand is null)
                 throw new Exception("Brand don't exist");
 
