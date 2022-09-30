@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using RedAndWhite.Domain;
 using RedAndWhite.Domain.ValueObjects.Brand;
 using RedAndWhite.Domain.ValueObjects.Product;
 using RedAndWhite.Model.Products;
@@ -29,11 +30,10 @@ namespace RedAndWhite.Controllers
         {
             try
             {
-                TestModifyBrand(3, "Test modify name");
-
 
                 var testProduct = this._productsService.GetProductById(1);
-                return View(this._productsService.GetAll().ToList());
+                return View(TestOrderByProduct());
+                //return View(this._productsService.GetAll().ToList());
             }
             catch (Exception ex)
             {
@@ -60,12 +60,12 @@ namespace RedAndWhite.Controllers
 
         //---------------------------------------
         //Tests
-        private void TestCreateProduct()
+        private void TestCreateProduct(string productName, string description)
         {
             NewProductModel newProductModel = new NewProductModel()
             {
-                Name = "Test Name",
-                Description = "TestDescription"
+                Name = productName,
+                Description = description
             };
             this._productsService.Create(newProductModel);
         }
@@ -81,7 +81,7 @@ namespace RedAndWhite.Controllers
             this._productsService.Modify(modifyPropertiesProduct);
         }
 
-       private void TestDeleteProduct(int id)
+        private void TestDeleteProduct(int id)
         {
             this._productsService.Delete(id);
         }
@@ -109,6 +109,16 @@ namespace RedAndWhite.Controllers
                 Name = name
             };
             this._brandService.Modify(modifyPropertiesBrand);
+        }
+
+        private List<Product> TestOrderByProduct()
+        {
+            return this._productsService.OrderBy();
+        }
+        
+        private List<Brand> TestOrderByBrand()
+        {
+            return this._brandService.OrderBy();
         }
     }
 }

@@ -12,5 +12,7 @@ namespace RedAndWhite.Service.Brands
         void Modify(ModifyPropertiesBrand modifyPropertiesBrand);
 
         void Delete(int id);
+
+        List<Brand> OrderBy();
     }
 }

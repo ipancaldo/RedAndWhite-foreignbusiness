@@ -9,6 +9,7 @@ namespace RedAndWhite.Repository
         void Add(TDomain entity);
         void Delete(TDomain entity);
         TDomain GetEntityByCriteria(Expression<Func<TDomain, bool>> predicate);
+        IEnumerable<TDomain> OrderBy(Expression<Func<TDomain, string>> predicate);
         void SaveChanges();
     }
 }

@@ -67,5 +67,11 @@ namespace RedAndWhite.Service.Products
 
             base.Repository.SaveChanges();
         }
+
+        public List<Product> OrderBy()
+        {
+            return base.Repository.OrderBy(OrderByNameEvaluator()).ToList();
+        }
+        private Expression<Func<Product, string>> OrderByNameEvaluator() => product => product.Name;
     }
 }

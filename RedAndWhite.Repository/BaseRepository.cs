@@ -26,7 +26,9 @@ namespace RedAndWhite.Repository
 
         public void Delete(TDomain entity) => this.DbSet.Remove(entity);
 
-        public TDomain GetEntityByCriteria(Expression<Func<TDomain, bool>> predicate) => this.DbSet.FirstOrDefault(predicate);
+        public TDomain GetEntityByCriteria(Expression<Func<TDomain, bool>> predicate) => this.DbSet.FirstOrDefault(predicate)!;
+
+        public IEnumerable<TDomain> OrderBy(Expression<Func<TDomain, string>> predicate) => (IEnumerable<TDomain>)this.DbSet.OrderBy(predicate);
 
         public void SaveChanges() => this._redAndWhiteContext.SaveChanges();
     }

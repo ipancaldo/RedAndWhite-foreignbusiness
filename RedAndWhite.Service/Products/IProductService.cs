@@ -15,5 +15,7 @@ namespace RedAndWhite.Service.Products
         void Delete(int id);
 
         void AssignBrand(string brandName, int productId);
+
+        List<Product> OrderBy();
     }
 }

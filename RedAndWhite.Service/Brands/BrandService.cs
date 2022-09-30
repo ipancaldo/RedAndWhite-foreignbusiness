@@ -57,10 +57,16 @@ namespace RedAndWhite.Service.Brands
         {
             var brand = GetBrandById(id);
             if (brand is null)
-                throw new Exception("Brand doesn't exist");
+                throw new Exception("Brand don't exist");
 
             base.Repository.Delete(brand);
             base.Repository.SaveChanges();
         }
+
+        public List<Brand> OrderBy()
+        {
+            return base.Repository.OrderBy(OrderByNameEvaluator()).ToList();
+        }
+        private Expression<Func<Brand, string>> OrderByNameEvaluator() => brand => brand.Name;
     }
 }
