@@ -29,7 +29,7 @@ namespace RedAndWhite.Controllers
         {
             try
             {
-                TestRemoveBrand(3, 2);
+                TestRemoveCategory(3, 1);
 
                 //return View(TestOrderByProduct());
                 return View(this._productsService.GetAll().ToList());
@@ -85,11 +85,6 @@ namespace RedAndWhite.Controllers
             this._productsService.Delete(id);
         }
 
-        private void TestAssignBrand(string brandName, int id)
-        {
-            this._productsService.AssignBrand(brandName, id);
-        }
-
         private void TestCreateNewBrand(string brandName)
         {
             this._brandService.Create(new NewBrand(brandName));
@@ -127,7 +122,7 @@ namespace RedAndWhite.Controllers
                 ProductId = productId,
                 BrandId = brandId
             };
-            this._productsService.AddBrand(addProductBrandModel);
+            this._productsService.AssignBrand(addProductBrandModel);
         }        
         
         private void TestRemoveBrand(int productId, int brandId)
@@ -138,6 +133,26 @@ namespace RedAndWhite.Controllers
                 BrandId = brandId
             };
             this._productsService.RemoveBrand(removeProductBrandModel);
+        }
+
+        private void TestAssignCategory(string categoryName, int productId)
+        {
+            AssignCategoryModel assignCategoryModel = new AssignCategoryModel()
+            {
+                CategoryName = categoryName,
+                ProductId = productId,
+            };
+            this._productsService.AssignCategory(assignCategoryModel);
+        }
+
+        private void TestRemoveCategory(int productId, int categoryId)
+        {
+            RemoveCategoryFromProductModel removeCategoryFromProductModel = new RemoveCategoryFromProductModel()
+            {
+                ProductId = productId,
+                CategoryId = categoryId
+            };
+            this._productsService.RemoveCategory(removeCategoryFromProductModel);
         }
     }
 }

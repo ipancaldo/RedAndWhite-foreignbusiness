@@ -1,6 +1,5 @@
 ﻿using RedAndWhite.Domain.ValueObjects.Product;
 using System.ComponentModel.DataAnnotations;
-using System.Linq;
 
 namespace RedAndWhite.Domain
 {
@@ -50,26 +49,42 @@ namespace RedAndWhite.Domain
 
         public void AssignBrand(Brand brand)
         {
-            var isBrandInProduct = this.Brands.Any(b => b.Name == brand.Name);
-            if (isBrandInProduct) return;
-
-            Brands.Add(brand);
-        }
-
-        public void AddBrand(Brand brand)
-        {
-            var isBrandAlreadyAssigned = this.Brands.Any(b => b.Name == brand.Name);
-            if(isBrandAlreadyAssigned) return;
+            if(DoExistInBrands(brand)) return;
 
             this.Brands.Add(brand);
         }
 
+        private bool DoExistInBrands(Brand brand)
+        {
+            return this.Brands.Any(b => b.Name.ToLower() == brand.Name.ToLower());
+        }
+
         public void RemoveBrand(Brand brand)
         {
-            var brandInProduct = this.Brands.FirstOrDefault(b => b.Name == brand.Name);
+            var brandInProduct = this.Brands.FirstOrDefault(b => b.Name.ToLower() == brand.Name.ToLower());
             if (brandInProduct is default(Brand)) return;
 
             this.Brands.Remove(brandInProduct!);
+        }
+
+        public void AssignCategory(Category category)
+        {
+            if (DoExistInCategories(category)) return;
+
+            Categories.Add(category);
+        }
+
+        private bool DoExistInCategories(Category category)
+        {
+            return this.Categories.Any(b => b.Name.ToLower() == category.Name.ToLower());
+        }
+
+        public void RemoveCategory(Category category)
+        {
+            var categoryInProduct = this.Categories.FirstOrDefault(b => b.Name.ToLower() == category.Name.ToLower());
+            if (categoryInProduct is default(Category)) return;
+
+            this.Categories.Remove(categoryInProduct!);
         }
     }
 }

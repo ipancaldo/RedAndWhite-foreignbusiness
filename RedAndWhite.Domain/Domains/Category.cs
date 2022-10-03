@@ -1,4 +1,6 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿using RedAndWhite.Domain.ValueObjects.Category;
+using RedAndWhite.Domain.ValueObjects.Product;
+using System.ComponentModel.DataAnnotations;
 
 namespace RedAndWhite.Domain
 {
@@ -13,5 +15,10 @@ namespace RedAndWhite.Domain
         public virtual List<Product> Products { get; set; }
 
         public virtual List<Brand> Brands { get; set; }
+
+        public void Create(CategoryToGet categoryToGet)
+        {
+            this.Name = categoryToGet.CategoryName;
+        }
     }
 }

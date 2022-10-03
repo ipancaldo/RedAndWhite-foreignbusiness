@@ -17,24 +17,22 @@ namespace RedAndWhite.Service.Brands
 
         public Brand GetOrCreateByName(NewBrand newBrand)
         {
-            var brand = base.Repository.GetEntityByCriteria(NameEvaluator(newBrand.Name));
+            var brand = base.Repository.GetEntityByCriteria(GetByNameEvaluator(newBrand.Name));
             if (brand != null) return brand;
 
             this.Aggregate.Create(newBrand);
             return this.Aggregate;
         }
-        private Expression<Func<Brand, bool>> NameEvaluator(string a) => b => b.Name == a;
-
         
         public Brand GetById(int id)
         {
-            return base.Repository.GetEntityByCriteria(GetByIdExpression(id));
+            return base.Repository.GetEntityByCriteria(GetByIdEvaluator(id));
         }
-        private Expression<Func<Brand, bool>> GetByIdExpression(int id) => brand => brand.Id.Equals(id);
+        private Expression<Func<Brand, bool>> GetByIdEvaluator(int id) => brand => brand.Id.Equals(id);
 
         public Brand GetById(GetBrandById id)
         {
-            return base.Repository.GetEntityByCriteria(GetByIdExpression(id.BrandId));
+            return base.Repository.GetEntityByCriteria(GetByIdEvaluator(id.BrandId));
         }
 
         //public List<Brand> GetByIds(GetBrandsById id)

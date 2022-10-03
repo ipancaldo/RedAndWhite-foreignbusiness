@@ -14,7 +14,6 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\RedAndWhite.Data\RedAndWhite.Data.csproj" />
     <ProjectReference Include="..\RedAndWhite.Service\RedAndWhite.Service.csproj" />
   </ItemGroup>
 

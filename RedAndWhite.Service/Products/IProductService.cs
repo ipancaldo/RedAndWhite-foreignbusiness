@@ -14,11 +14,13 @@ namespace RedAndWhite.Service.Products
 
         void ModifyProperties(ModifyPropertiesProduct modifyPropertiesProduct);
 
-        void AddBrand(AddOrRemoveProductBrandModel addProductBrandModel);
+        void AssignBrand(AddOrRemoveProductBrandModel addOrRemoveProductBrandModel);
 
         void RemoveBrand(AddOrRemoveProductBrandModel addProductBrandModel);
 
-        void AssignBrand(string brandName, int productId);
+        void AssignCategory(AssignCategoryModel assignCategoryModel);
+
+        void RemoveCategory(RemoveCategoryFromProductModel removeCategoryFromProductModel);
 
         List<Product> OrderBy();
     }
