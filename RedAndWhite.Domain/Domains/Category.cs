@@ -16,9 +16,9 @@ namespace RedAndWhite.Domain
 
         public virtual List<Brand> Brands { get; set; }
 
-        public void Create(CategoryToGet categoryToGet)
+        public void Create(NewCategory newCategory)
         {
-            this.Name = categoryToGet.CategoryName;
+            this.Name = newCategory.CategoryName;
         }
     }
 }

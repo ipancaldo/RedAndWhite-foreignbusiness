@@ -23,7 +23,7 @@ namespace RedAndWhite.Domain
 
         public void Create(NewBrand newBrand)
         {
-            this.Name = newBrand.Name;
+            this.Name = newBrand.BrandName;
         }
 
         public void Modify(ModifyPropertiesBrand modifyPropertiesBrand)

@@ -1,6 +1,6 @@
 ﻿namespace RedAndWhite.Domain.ValueObjects.Category
 {
-    public class CategoryToGet : ValueObject
+    public class NewCategory : ValueObject
     {
         public string CategoryName { get; set; }
     }

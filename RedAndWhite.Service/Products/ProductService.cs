@@ -84,7 +84,7 @@ namespace RedAndWhite.Service.Products
 
         public void AssignCategory(AssignCategoryModel assignCategoryModel)
         {
-            var category = this._categoryDomainService.GetOrCreateByName(base.Mapper.Map<CategoryToGet>(assignCategoryModel));
+            var category = this._categoryDomainService.GetByName(base.Mapper.Map<CategoryToGet>(assignCategoryModel));
 
             var product = GetProductById(assignCategoryModel.ProductId);
             IfNullThrowException(product);

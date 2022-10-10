@@ -1,10 +1,14 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using RedAndWhite.Domain;
+using RedAndWhite.Domain.DomainServices;
 using RedAndWhite.Domain.ValueObjects.Brand;
 using RedAndWhite.Domain.ValueObjects.Product;
+using RedAndWhite.Model.Brands;
+using RedAndWhite.Model.Categories;
 using RedAndWhite.Model.Products;
 using RedAndWhite.Models;
 using RedAndWhite.Service.Brands;
+using RedAndWhite.Service.Categories;
 using RedAndWhite.Service.Products;
 using System.Diagnostics;
 
@@ -15,23 +19,25 @@ namespace RedAndWhite.Controllers
         private readonly ILogger<HomeController> _logger;
         private readonly IProductService _productsService;
         private readonly IBrandService _brandService;
+        private readonly ICategoryService _categoryService;
+        private readonly ICategoryDomainService _categoryDomainService;
 
         public HomeController(ILogger<HomeController> logger,
                               IProductService productsService,
-                              IBrandService brandService)
+                              IBrandService brandService,
+                              ICategoryService categoryService)
         {
             this._logger = logger;
             this._productsService = productsService;
             this._brandService = brandService;
+            this._categoryService = categoryService;
         }
 
         public IActionResult Index()
         {
             try
             {
-                TestRemoveCategory(3, 1);
 
-                //return View(TestOrderByProduct());
                 return View(this._productsService.GetAll().ToList());
             }
             catch (Exception ex)
@@ -87,7 +93,11 @@ namespace RedAndWhite.Controllers
 
         private void TestCreateNewBrand(string brandName)
         {
-            this._brandService.Create(new NewBrand(brandName));
+            NewBrandModel newBrandModel = new NewBrandModel()
+            {
+                BrandName = brandName
+            };
+            this._brandService.Create(newBrandModel);
         }
 
         private void TestDeleteBrand(int id)
@@ -109,7 +119,7 @@ namespace RedAndWhite.Controllers
         {
             return this._productsService.OrderBy();
         }
-        
+
         private List<Brand> TestOrderByBrand()
         {
             return this._brandService.OrderBy();
@@ -123,8 +133,8 @@ namespace RedAndWhite.Controllers
                 BrandId = brandId
             };
             this._productsService.AssignBrand(addProductBrandModel);
-        }        
-        
+        }
+
         private void TestRemoveBrand(int productId, int brandId)
         {
             AddOrRemoveProductBrandModel removeProductBrandModel = new AddOrRemoveProductBrandModel()
@@ -154,5 +164,22 @@ namespace RedAndWhite.Controllers
             };
             this._productsService.RemoveCategory(removeCategoryFromProductModel);
         }
+
+        private List<Category> TestOrderByCategory()
+        {
+            return this._categoryService.OrderBy();
+        }
+
+        private void TestCreateCategory(string categoryName)
+        {
+            NewCategoryModel newCategoryModel = new NewCategoryModel()
+            {
+                CategoryName = categoryName
+            };
+
+            this._categoryService.Create(newCategoryModel);
+        }
+
+
     }
 }

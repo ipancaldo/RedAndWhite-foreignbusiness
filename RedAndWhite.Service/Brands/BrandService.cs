@@ -2,6 +2,7 @@
 using RedAndWhite.Domain;
 using RedAndWhite.Domain.DomainServices;
 using RedAndWhite.Domain.ValueObjects.Brand;
+using RedAndWhite.Model.Brands;
 using RedAndWhite.Repository.Brands;
 using System.Linq.Expressions;
 
@@ -14,15 +15,6 @@ namespace RedAndWhite.Service.Brands
             : base(repository, mapper)
         {
         }
-
-        public Brand GetOrCreateByName(NewBrand newBrand)
-        {
-            var brand = base.Repository.GetEntityByCriteria(GetByNameEvaluator(newBrand.Name));
-            if (brand != null) return brand;
-
-            this.Aggregate.Create(newBrand);
-            return this.Aggregate;
-        }
         
         public Brand GetById(int id)
         {
@@ -30,9 +22,18 @@ namespace RedAndWhite.Service.Brands
         }
         private Expression<Func<Brand, bool>> GetByIdEvaluator(int id) => brand => brand.Id.Equals(id);
 
+
         public Brand GetById(GetBrandById id)
         {
             return base.Repository.GetEntityByCriteria(GetByIdEvaluator(id.BrandId));
+        }
+
+        public Brand GetByName(NewBrand newBrand)
+        {
+            var brand = base.Repository.GetEntityByCriteria(GetByNameEvaluator(newBrand.BrandName));
+            if (brand != null) return brand;
+
+            throw new Exception("Brand don't exist.");
         }
 
         //public List<Brand> GetByIds(GetBrandsById id)
@@ -41,13 +42,13 @@ namespace RedAndWhite.Service.Brands
         //}
         //private Expression<Func<Brand, bool>> GetByIdsExpression(List<int> ids) => brand => ids.Any(b => brand.Id == b);                
 
-        public void Create(NewBrand newBrand)
+        public void Create(NewBrandModel newBrandModel)
         {
-            var brand = base.Repository.GetEntityByCriteria(GetByNameEvaluator(newBrand.Name));
+            var brand = base.Repository.GetEntityByCriteria(GetByNameEvaluator(newBrandModel.BrandName));
             if (brand is not null)
                 throw new Exception("Brand already exist.");
 
-            this.Aggregate.Create(newBrand);
+            this.Aggregate.Create(base.Mapper.Map<NewBrand>(newBrandModel));
             base.Repository.Add(this.Aggregate);
             base.Repository.SaveChanges();
         }
