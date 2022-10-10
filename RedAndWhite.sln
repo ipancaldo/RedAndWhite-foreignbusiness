@@ -3,7 +3,7 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.0.32014.148
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "RedAndWhite.UI", "RedAndWhite\RedAndWhite.UI.csproj", "{0F88D390-F69D-4421-BE1D-DD77BB3CE417}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "RedAndWhite.AdminPanel.UI", "RedAndWhite\RedAndWhite.AdminPanel.UI.csproj", "{0F88D390-F69D-4421-BE1D-DD77BB3CE417}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "RedAndWhite.Model", "RedAndWhite.Model\RedAndWhite.Model.csproj", "{2340D0F8-88A6-4A5A-86AE-2A525E7CEA8E}"
 EndProject
@@ -16,6 +16,8 @@ EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "RedAndWhite.Data", "RedAndWhite.Data\RedAndWhite.Data.csproj", "{39683FEA-C71B-4897-AB5D-7084CF5CB464}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "RedAndWhite.Infrastructure", "RedAndWhite.Infrastructure\RedAndWhite.Infrastructure.csproj", "{0DE9FB00-CB19-4221-AB67-679D5BAB8DB6}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RedAndWhite.Users.UI", "RedAndWhite.Users.UI\RedAndWhite.Users.UI.csproj", "{D87797EC-FDE0-40ED-BF77-2CA3D8ADC580}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -51,6 +53,10 @@ Global
 		{0DE9FB00-CB19-4221-AB67-679D5BAB8DB6}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{0DE9FB00-CB19-4221-AB67-679D5BAB8DB6}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{0DE9FB00-CB19-4221-AB67-679D5BAB8DB6}.Release|Any CPU.Build.0 = Release|Any CPU
+		{D87797EC-FDE0-40ED-BF77-2CA3D8ADC580}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D87797EC-FDE0-40ED-BF77-2CA3D8ADC580}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D87797EC-FDE0-40ED-BF77-2CA3D8ADC580}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D87797EC-FDE0-40ED-BF77-2CA3D8ADC580}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
