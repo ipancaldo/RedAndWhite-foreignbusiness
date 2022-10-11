@@ -40,6 +40,11 @@ namespace RedAndWhite.Controllers
             }
         }
 
+        public IActionResult AdminPanel()
+        {
+            return View();
+        }
+
         public IActionResult Privacy()
         {
             return View();
