@@ -20,7 +20,7 @@ namespace RedAndWhite.Repository
 
         public IEnumerable<TDomain> GetAll() => this.DbSet.AsEnumerable<TDomain>();
 
-        public IEnumerable<TDomain> GetEntityListByCriteria(Expression<Func<TDomain, bool>> predicate) => (IEnumerable<TDomain>)this.DbSet.Where(predicate);
+        public IEnumerable<TDomain> GetEntityListByCriteria(Expression<Func<TDomain, bool>> predicate) => this.DbSet.Where(predicate).ToList();
         
         public void Add(TDomain entity) => this._redAndWhiteContext.Add(entity);
 

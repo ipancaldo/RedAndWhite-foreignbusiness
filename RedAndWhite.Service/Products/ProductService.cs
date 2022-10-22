@@ -4,6 +4,7 @@ using RedAndWhite.Domain.DomainServices;
 using RedAndWhite.Domain.ValueObjects.Brand;
 using RedAndWhite.Domain.ValueObjects.Category;
 using RedAndWhite.Domain.ValueObjects.Product;
+using RedAndWhite.Model.Categories;
 using RedAndWhite.Model.Products;
 using RedAndWhite.Repository.Products;
 using System.Linq.Expressions;
@@ -30,6 +31,19 @@ namespace RedAndWhite.Service.Products
             return base.Repository.GetEntityByCriteria(GetByIdEvaluator(id));
         }
         private Expression<Func<Product, bool>> GetByIdEvaluator(int id) => user => user.Id.Equals(id);
+
+        public List<Product> GetByCategory(GetProductsByCategoryModel getProductsByCategoryModel)
+        {
+            var category = this._categoryDomainService.GetByName(base.Mapper.Map<CategoryToGet>(getProductsByCategoryModel));
+            IfNullThrowException(category);
+
+            var products = base.Repository.GetEntityListByCriteria(GetByCategoryCriteria(category));
+            if(!products.Any())
+                throw new Exception($"There were no Products with Category '{getProductsByCategoryModel.CategoryName}'");
+
+            return products.ToList();
+        }
+        private Expression<Func<Product, bool>> GetByCategoryCriteria(Category category) => product => product.Categories.Contains(category);
 
         public void Create(NewProductModel newProductModel)
         {
@@ -110,10 +124,11 @@ namespace RedAndWhite.Service.Products
         }
         private Expression<Func<Product, string>> OrderByNameEvaluator() => product => product.Name;
 
-        private void IfNullThrowException(Product product)
+
+        private void IfNullThrowException<T>(T entity)
         {
-            if (product is null)
-                throw new Exception("Product don't exist");
+            if (entity is null)
+                throw new Exception($"{entity.GetType} don't exist");
         }
     }
 }

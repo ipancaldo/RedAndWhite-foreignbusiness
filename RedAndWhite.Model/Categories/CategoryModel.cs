@@ -3,7 +3,7 @@ using RedAndWhite.Infrastructure.Mapping;
 
 namespace RedAndWhite.Model.Categories
 {
-    public class NewCategoryModel : IMapFrom<NewCategory>
+    public class CategoryModel : IMapFrom<NewCategory>
     {
         public string CategoryName { get; set; }
     }

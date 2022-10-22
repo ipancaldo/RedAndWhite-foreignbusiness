@@ -30,7 +30,7 @@ namespace RedAndWhite.Service.Categories
             throw new Exception("Category don't exist.");
         }
 
-        public void Create(NewCategoryModel newCategoryModel)
+        public void Create(CategoryModel newCategoryModel)
         {
             var category = base.Repository.GetEntityByCriteria(GetByNameEvaluator(newCategoryModel.CategoryName));
             if (category is not null)

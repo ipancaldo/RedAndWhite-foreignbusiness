@@ -5,7 +5,7 @@ namespace RedAndWhite.Service.Categories
 {
     public interface ICategoryService : IServiceBase<Category>
     {
-        void Create(NewCategoryModel newCategoryModel);
+        void Create(CategoryModel newCategoryModel);
 
         List<Category> OrderBy();
     }

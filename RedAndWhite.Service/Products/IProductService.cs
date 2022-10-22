@@ -1,5 +1,6 @@
 ﻿using RedAndWhite.Domain;
 using RedAndWhite.Domain.ValueObjects.Product;
+using RedAndWhite.Model.Categories;
 using RedAndWhite.Model.Products;
 
 namespace RedAndWhite.Service.Products
@@ -7,6 +8,8 @@ namespace RedAndWhite.Service.Products
     public interface IProductService : IServiceBase<Product>
     {
         Product GetProductById(int id);
+
+        List<Product> GetByCategory(GetProductsByCategoryModel categoryModel);
 
         void Create(NewProductModel newProductModel);
 

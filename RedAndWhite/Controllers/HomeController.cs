@@ -37,7 +37,6 @@ namespace RedAndWhite.Controllers
         {
             try
             {
-
                 return View(this._productsService.GetAll().ToList());
             }
             catch (Exception ex)
@@ -177,7 +176,7 @@ namespace RedAndWhite.Controllers
 
         private void TestCreateCategory(string categoryName)
         {
-            NewCategoryModel newCategoryModel = new NewCategoryModel()
+            CategoryModel newCategoryModel = new CategoryModel()
             {
                 CategoryName = categoryName
             };
@@ -185,6 +184,14 @@ namespace RedAndWhite.Controllers
             this._categoryService.Create(newCategoryModel);
         }
 
+        private List<Product> TestGetProductsByCategory(string categoryName)
+        {
+            GetProductsByCategoryModel getProductsByCategoryModel = new GetProductsByCategoryModel()
+            {
+                CategoryName = categoryName
+            };
 
+            return this._productsService.GetByCategory(getProductsByCategoryModel);
+        }
     }
 }
