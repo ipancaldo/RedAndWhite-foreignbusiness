@@ -4,15 +4,22 @@ using RedAndWhite.Domain.DomainServices;
 using RedAndWhite.Domain.ValueObjects.Category;
 using RedAndWhite.Model.Categories;
 using RedAndWhite.Repository.Categories;
+using RedAndWhite.Service.Common;
 using System.Linq.Expressions;
 
 namespace RedAndWhite.Service.Categories
 {
     public class CategoryService : ServiceBase<Category, ICategoryRepository>, ICategoryService, ICategoryDomainService
     {
-        public CategoryService(ICategoryRepository repository, IMapper mapper) 
+        private readonly IResultVerifier _nullVerifier;
+        const string CategoryType = "Category";
+
+        public CategoryService(ICategoryRepository repository,
+                               IResultVerifier nullVerifier,
+                               IMapper mapper)
             : base(repository, mapper)
         {
+            this._nullVerifier = nullVerifier;
         }
 
         public Category GetById(GetCategoryById getCategoryById)
@@ -25,16 +32,15 @@ namespace RedAndWhite.Service.Categories
         public Category GetByName(CategoryToGet categoryToGet)
         {
             var category = base.Repository.GetEntityByCriteria(GetByNameEvaluator(categoryToGet.CategoryName));
-            if (category != null) return category;
+            this._nullVerifier.IfNullThrowException(category, CategoryType);
 
-            throw new Exception("Category don't exist.");
+            return category;
         }
 
         public void Create(CategoryModel newCategoryModel)
         {
             var category = base.Repository.GetEntityByCriteria(GetByNameEvaluator(newCategoryModel.CategoryName));
-            if (category is not null)
-                throw new Exception("Category already exist.");
+            this._nullVerifier.IfExistsThrowException(category, CategoryType);
 
             this.Aggregate.Create(base.Mapper.Map<NewCategory>(newCategoryModel));
             base.Repository.Add(this.Aggregate);

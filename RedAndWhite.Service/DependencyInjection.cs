@@ -1,6 +1,7 @@
 ﻿using Microsoft.Extensions.DependencyInjection;
 using RedAndWhite.Service.Brands;
 using RedAndWhite.Service.Categories;
+using RedAndWhite.Service.Common;
 using RedAndWhite.Service.Products;
 using System.Reflection;
 
@@ -13,6 +14,7 @@ namespace RedAndWhite.Service
             services.AddScoped<IProductService, ProductService>();
             services.RegisterAsImplementedInterfaces<BrandService>(ServiceLifetime.Scoped);
             services.RegisterAsImplementedInterfaces<CategoryService>(ServiceLifetime.Scoped);
+            services.AddScoped<IResultVerifier, ResultVerifier>();
 
             return services;
         }

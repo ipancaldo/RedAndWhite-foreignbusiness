@@ -31,7 +31,7 @@ namespace RedAndWhite.Service.Brands
         public Brand GetByName(NewBrand newBrand)
         {
             var brand = base.Repository.GetEntityByCriteria(GetByNameEvaluator(newBrand.BrandName));
-            if (brand != null) return brand;
+            if (brand != null) return brand; //Change with service
 
             throw new Exception("Brand don't exist.");
         }
@@ -45,7 +45,7 @@ namespace RedAndWhite.Service.Brands
         public void Create(NewBrandModel newBrandModel)
         {
             var brand = base.Repository.GetEntityByCriteria(GetByNameEvaluator(newBrandModel.BrandName));
-            if (brand is not null)
+            if (brand is not null) //Change with service
                 throw new Exception("Brand already exist.");
 
             this.Aggregate.Create(base.Mapper.Map<NewBrand>(newBrandModel));
@@ -57,7 +57,7 @@ namespace RedAndWhite.Service.Brands
         public void Modify(ModifyPropertiesBrand modifyPropertiesBrand)
         {
             var brand = GetById(modifyPropertiesBrand.Id);
-            if (brand == null)
+            if (brand == null) //Change with service
                 throw new Exception("Brand don't exist.");
 
             brand.Modify(modifyPropertiesBrand);
@@ -67,7 +67,7 @@ namespace RedAndWhite.Service.Brands
         public void Delete(int id)
         {
             var brand = GetById(id);
-            if (brand is null)
+            if (brand is null) //Change with service
                 throw new Exception("Brand don't exist");
 
             base.Repository.Delete(brand);
