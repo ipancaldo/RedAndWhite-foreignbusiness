@@ -16,20 +16,20 @@ namespace RedAndWhite.Service.Products
     {
         private readonly IBrandDomainService _brandDomainService;
         private readonly ICategoryDomainService _categoryDomainService;
-        private readonly IResultVerifier _nullVerifier;
+        private readonly IResultVerifier _resultVerifier;
 
         const string ProductType = "Product";
 
         public ProductService(IProductRepository repository,
                               IBrandDomainService brandDomainService,
                               ICategoryDomainService categoryDomainService,
-                              IResultVerifier nullVerifier,
+                              IResultVerifier resultVerifier,
                               IMapper mapper)
             : base(repository, mapper)
         {
             this._brandDomainService = brandDomainService;
             this._categoryDomainService = categoryDomainService;
-            this._nullVerifier = nullVerifier;
+            this._resultVerifier = resultVerifier;
         }
 
         public Product GetProductById(int id)
@@ -43,7 +43,7 @@ namespace RedAndWhite.Service.Products
             var category = this._categoryDomainService.GetByName(base.Mapper.Map<CategoryToGet>(getProductsByCategoryModel));
 
             var products = base.Repository.GetEntityListByCriteria(GetByCategoryCriteria(category));
-            this._nullVerifier.IfEmptyThrowException(products.ToList());
+            this._resultVerifier.IfEmptyThrowException(products.ToList());
 
             return products.ToList();
         }
@@ -52,7 +52,7 @@ namespace RedAndWhite.Service.Products
         public void Create(NewProductModel newProductModel)
         {
             var product = base.Repository.GetEntityByCriteria(GetByNameEvaluator(newProductModel.Name));
-            this._nullVerifier.IfExistsThrowException(product, ProductType); //Test
+            this._resultVerifier.IfExistsThrowException(product, ProductType);
 
             this.Aggregate.Create(base.Mapper.Map<NewProduct>(newProductModel));
             base.Repository.Add(this.Aggregate);
@@ -63,7 +63,7 @@ namespace RedAndWhite.Service.Products
         public void Delete(int id)
         {
             var product = GetProductById(id);
-            IfNullThrowException(product); //Change
+            this._resultVerifier.IfNullThrowException(product, ProductType);
 
             base.Repository.Delete(product);
             base.Repository.SaveChanges();
@@ -72,7 +72,7 @@ namespace RedAndWhite.Service.Products
         public void ModifyProperties(ModifyPropertiesProduct modifyPropertiesProduct)
         {
             var product = GetProductById(modifyPropertiesProduct.Id);
-            IfNullThrowException(product); //Change
+            this._resultVerifier.IfNullThrowException(product, ProductType);
 
             product.ModifyProperties(modifyPropertiesProduct);
             base.Repository.SaveChanges();
@@ -81,7 +81,7 @@ namespace RedAndWhite.Service.Products
         public void AssignBrand(AddOrRemoveProductBrandModel addOrRemoveProductBrandModel)
         {
             var product = GetProductById(addOrRemoveProductBrandModel.ProductId);
-            IfNullThrowException(product); //Change
+            this._resultVerifier.IfNullThrowException(product, ProductType);
 
             var brand = this._brandDomainService.GetById(base.Mapper.Map<GetBrandById>(addOrRemoveProductBrandModel));
             product.AssignBrand(brand);
@@ -92,20 +92,20 @@ namespace RedAndWhite.Service.Products
         public void RemoveBrand(AddOrRemoveProductBrandModel addProductBrandModel)
         {
             var product = GetProductById(addProductBrandModel.ProductId);
-            IfNullThrowException(product); //Change
+            this._resultVerifier.IfNullThrowException(product, ProductType);
 
             var brand = this._brandDomainService.GetById(base.Mapper.Map<GetBrandById>(addProductBrandModel));
             product.RemoveBrand(brand);
+
             base.Repository.SaveChanges();
         }
 
         public void AssignCategory(AssignCategoryModel assignCategoryModel)
         {
-            var category = this._categoryDomainService.GetByName(base.Mapper.Map<CategoryToGet>(assignCategoryModel));
-
             var product = GetProductById(assignCategoryModel.ProductId);
-            IfNullThrowException(product); //Change
+            this._resultVerifier.IfNullThrowException(product, ProductType);
 
+            var category = this._categoryDomainService.GetById(base.Mapper.Map<GetCategoryById>(assignCategoryModel));
             product.AssignCategory(category);
 
             base.Repository.SaveChanges();
@@ -114,10 +114,11 @@ namespace RedAndWhite.Service.Products
         public void RemoveCategory(RemoveCategoryFromProductModel removeCategoryFromProductModel)
         {
             var product = GetProductById(removeCategoryFromProductModel.ProductId);
-            IfNullThrowException(product); //Change
+            this._resultVerifier.IfNullThrowException(product, ProductType);
 
             var category = this._categoryDomainService.GetById(base.Mapper.Map<GetCategoryById>(removeCategoryFromProductModel));
             product.RemoveCategory(category);
+
             base.Repository.SaveChanges();
         }
 
@@ -126,12 +127,5 @@ namespace RedAndWhite.Service.Products
             return base.Repository.OrderBy(OrderByNameEvaluator()).ToList();
         }
         private Expression<Func<Product, string>> OrderByNameEvaluator() => product => product.Name;
-
-
-        private void IfNullThrowException<T>(T entity) //Delete
-        {
-            if (entity is null)
-                throw new Exception($"{entity.GetType} don't exist");
-        }
     }
 }

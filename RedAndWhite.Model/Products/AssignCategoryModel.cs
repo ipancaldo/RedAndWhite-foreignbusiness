@@ -3,9 +3,9 @@ using RedAndWhite.Infrastructure.Mapping;
 
 namespace RedAndWhite.Model.Products
 {
-    public class AssignCategoryModel : IMapFrom<CategoryToGet>
+    public class AssignCategoryModel : IMapFrom<GetCategoryById>
     {
-        public string CategoryName { get; set; }
+        public int CategoryId { get; set; }
 
         public int ProductId { get; set; }
     }

@@ -16,18 +16,15 @@ namespace RedAndWhite.Controllers
 {
     public class HomeController : Controller
     {
-        private readonly ILogger<HomeController> _logger;
         private readonly IProductService _productsService;
         private readonly IBrandService _brandService;
         private readonly ICategoryService _categoryService;
         private readonly ICategoryDomainService _categoryDomainService;
 
-        public HomeController(ILogger<HomeController> logger,
-                              IProductService productsService,
+        public HomeController(IProductService productsService,
                               IBrandService brandService,
                               ICategoryService categoryService)
         {
-            this._logger = logger;
             this._productsService = productsService;
             this._brandService = brandService;
             this._categoryService = categoryService;
@@ -37,6 +34,8 @@ namespace RedAndWhite.Controllers
         {
             try
             {
+                TestRemoveCategory(35, 35);
+
                 return View(this._productsService.GetAll().ToList());
             }
             catch (Exception ex)
@@ -79,13 +78,13 @@ namespace RedAndWhite.Controllers
             this._productsService.Create(newProductModel);
         }
 
-        private void TestModifyProduct()
+        private void TestModifyProduct(int id, string name, string? description)
         {
             ModifyPropertiesProduct modifyPropertiesProduct = new ModifyPropertiesProduct()
             {
-                Id = 2,
-                Name = "New test name",
-                Description = null
+                Id = id,
+                Name = name,
+                Description = description
             };
             this._productsService.ModifyProperties(modifyPropertiesProduct);
         }
@@ -129,7 +128,7 @@ namespace RedAndWhite.Controllers
             return this._brandService.OrderBy();
         }
 
-        private void TestAddBrand(int productId, int brandId)
+        private void TestAssignBrandToProduct(int productId, int brandId)
         {
             AddOrRemoveProductBrandModel addProductBrandModel = new AddOrRemoveProductBrandModel()
             {
@@ -149,11 +148,11 @@ namespace RedAndWhite.Controllers
             this._productsService.RemoveBrand(removeProductBrandModel);
         }
 
-        private void TestAssignCategory(string categoryName, int productId)
+        private void TestAssignCategory(int categoryId, int productId)
         {
             AssignCategoryModel assignCategoryModel = new AssignCategoryModel()
             {
-                CategoryName = categoryName,
+                CategoryId = categoryId,
                 ProductId = productId,
             };
             this._productsService.AssignCategory(assignCategoryModel);

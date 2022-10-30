@@ -24,7 +24,10 @@ namespace RedAndWhite.Service.Categories
 
         public Category GetById(GetCategoryById getCategoryById)
         {
-            return base.Repository.GetEntityByCriteria(GetByIdEvaluator(getCategoryById.CategoryId));
+            var category = base.Repository.GetEntityByCriteria(GetByIdEvaluator(getCategoryById.CategoryId));
+            this._nullVerifier.IfNullThrowException(category, CategoryType);
+
+            return category;
         }
 
         private Expression<Func<Category, bool>> GetByIdEvaluator(int id) => category => category.Id.Equals(id);
@@ -44,6 +47,7 @@ namespace RedAndWhite.Service.Categories
 
             this.Aggregate.Create(base.Mapper.Map<NewCategory>(newCategoryModel));
             base.Repository.Add(this.Aggregate);
+
             base.Repository.SaveChanges();
         }
 

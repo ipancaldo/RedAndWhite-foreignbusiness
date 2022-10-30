@@ -4,16 +4,23 @@ using RedAndWhite.Domain.DomainServices;
 using RedAndWhite.Domain.ValueObjects.Brand;
 using RedAndWhite.Model.Brands;
 using RedAndWhite.Repository.Brands;
+using RedAndWhite.Service.Common;
 using System.Linq.Expressions;
 
 namespace RedAndWhite.Service.Brands
 {
     public class BrandService : ServiceBase<Brand, IBrandRepository>, IBrandService, IBrandDomainService
     {
+        private readonly IResultVerifier _resultVerifier;
+
+        const string BrandType = "Brand";
+
         public BrandService(IBrandRepository repository,
-                             IMapper mapper) 
+                            IResultVerifier resultVerifier,
+                            IMapper mapper) 
             : base(repository, mapper)
         {
+            this._resultVerifier = resultVerifier;
         }
         
         public Brand GetById(int id)
@@ -25,13 +32,16 @@ namespace RedAndWhite.Service.Brands
 
         public Brand GetById(GetBrandById id)
         {
-            return base.Repository.GetEntityByCriteria(GetByIdEvaluator(id.BrandId));
+            var brand = base.Repository.GetEntityByCriteria(GetByIdEvaluator(id.BrandId));
+            this._resultVerifier.IfNullThrowException(brand, BrandType);
+
+            return brand;
         }
 
         public Brand GetByName(NewBrand newBrand)
         {
             var brand = base.Repository.GetEntityByCriteria(GetByNameEvaluator(newBrand.BrandName));
-            if (brand != null) return brand; //Change with service
+            if (brand != null) return brand; //TODO: Change
 
             throw new Exception("Brand don't exist.");
         }
@@ -45,7 +55,7 @@ namespace RedAndWhite.Service.Brands
         public void Create(NewBrandModel newBrandModel)
         {
             var brand = base.Repository.GetEntityByCriteria(GetByNameEvaluator(newBrandModel.BrandName));
-            if (brand is not null) //Change with service
+            if (brand is not null) //TODO: Change
                 throw new Exception("Brand already exist.");
 
             this.Aggregate.Create(base.Mapper.Map<NewBrand>(newBrandModel));
@@ -57,7 +67,7 @@ namespace RedAndWhite.Service.Brands
         public void Modify(ModifyPropertiesBrand modifyPropertiesBrand)
         {
             var brand = GetById(modifyPropertiesBrand.Id);
-            if (brand == null) //Change with service
+            if (brand == null) //TODO: Change
                 throw new Exception("Brand don't exist.");
 
             brand.Modify(modifyPropertiesBrand);
@@ -67,7 +77,7 @@ namespace RedAndWhite.Service.Brands
         public void Delete(int id)
         {
             var brand = GetById(id);
-            if (brand is null) //Change with service
+            if (brand is null) //TODO: Change
                 throw new Exception("Brand don't exist");
 
             base.Repository.Delete(brand);

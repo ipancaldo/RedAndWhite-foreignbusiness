@@ -34,6 +34,9 @@ namespace RedAndWhite.Domain
 
         public void ModifyProperties(ModifyPropertiesProduct modifyPropertiesProduct)
         {
+            if (modifyPropertiesProduct.Name.Count() < 2)
+                throw new Exception($"The name of the producy cannot be less than 2 characters.");
+
             if (this.Name.ToLower() != modifyPropertiesProduct.Name.ToLower() &&
                 !string.IsNullOrEmpty(modifyPropertiesProduct.Name))
                 this.Name = modifyPropertiesProduct.Name;
