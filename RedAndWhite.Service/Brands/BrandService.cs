@@ -25,7 +25,10 @@ namespace RedAndWhite.Service.Brands
         
         public Brand GetById(int id)
         {
-            return base.Repository.GetEntityByCriteria(GetByIdEvaluator(id));
+            var brand = base.Repository.GetEntityByCriteria(GetByIdEvaluator(id));
+            this._resultVerifier.IfNullThrowException(brand, BrandType);
+
+            return brand;
         }
         private Expression<Func<Brand, bool>> GetByIdEvaluator(int id) => brand => brand.Id.Equals(id);
 
@@ -41,7 +44,7 @@ namespace RedAndWhite.Service.Brands
         public Brand GetByName(NewBrand newBrand)
         {
             var brand = base.Repository.GetEntityByCriteria(GetByNameEvaluator(newBrand.BrandName));
-            if (brand != null) return brand; //TODO: Change
+            this._resultVerifier.IfNullThrowException(brand, BrandType);
 
             throw new Exception("Brand don't exist.");
         }
@@ -55,11 +58,11 @@ namespace RedAndWhite.Service.Brands
         public void Create(NewBrandModel newBrandModel)
         {
             var brand = base.Repository.GetEntityByCriteria(GetByNameEvaluator(newBrandModel.BrandName));
-            if (brand is not null) //TODO: Change
-                throw new Exception("Brand already exist.");
+            this._resultVerifier.IfExistsThrowException(brand, BrandType);
 
             this.Aggregate.Create(base.Mapper.Map<NewBrand>(newBrandModel));
             base.Repository.Add(this.Aggregate);
+
             base.Repository.SaveChanges();
         }
         private Expression<Func<Brand, bool>> GetByNameEvaluator(string brandName) => brand => brand.Name.ToLower() == brandName.ToLower();
@@ -67,8 +70,7 @@ namespace RedAndWhite.Service.Brands
         public void Modify(ModifyPropertiesBrand modifyPropertiesBrand)
         {
             var brand = GetById(modifyPropertiesBrand.Id);
-            if (brand == null) //TODO: Change
-                throw new Exception("Brand don't exist.");
+            this._resultVerifier.IfNullThrowException(brand, BrandType);
 
             brand.Modify(modifyPropertiesBrand);
             base.Repository.SaveChanges();
@@ -77,8 +79,7 @@ namespace RedAndWhite.Service.Brands
         public void Delete(int id)
         {
             var brand = GetById(id);
-            if (brand is null) //TODO: Change
-                throw new Exception("Brand don't exist");
+            this._resultVerifier.IfNullThrowException(brand, BrandType);
 
             base.Repository.Delete(brand);
             base.Repository.SaveChanges();

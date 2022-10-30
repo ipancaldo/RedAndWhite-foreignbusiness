@@ -34,8 +34,6 @@ namespace RedAndWhite.Controllers
         {
             try
             {
-                TestRemoveCategory(35, 35);
-
                 return View(this._productsService.GetAll().ToList());
             }
             catch (Exception ex)
@@ -136,6 +134,16 @@ namespace RedAndWhite.Controllers
                 BrandId = brandId
             };
             this._productsService.AssignBrand(addProductBrandModel);
+        }
+
+        private void TestGetBrandById(int id)
+        {
+            this._brandService.GetById(id);
+        }
+
+        private void TestDomainGetBrandById(int id)
+        {
+            this._brandService.GetById(id);
         }
 
         private void TestRemoveBrand(int productId, int brandId)
