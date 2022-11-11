@@ -34,6 +34,8 @@ namespace RedAndWhite.Controllers
         {
             try
             {
+                var test = TestGetBrandsByCategory(2);
+
                 return View(this._productsService.GetAll().ToList());
             }
             catch (Exception ex)
@@ -199,6 +201,16 @@ namespace RedAndWhite.Controllers
             };
 
             return this._productsService.GetByCategory(getProductsByCategoryModel);
+        }
+
+        private List<Brand> TestGetBrandsByCategory(int categoryId)
+        {
+            GetCategoryByIdModel categoryModel = new GetCategoryByIdModel()
+            {
+                CategoryId = categoryId
+            };
+
+            return this._brandService.GetByCategory(categoryModel);
         }
     }
 }

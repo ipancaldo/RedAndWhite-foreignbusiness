@@ -2,7 +2,9 @@
 using RedAndWhite.Domain;
 using RedAndWhite.Domain.DomainServices;
 using RedAndWhite.Domain.ValueObjects.Brand;
+using RedAndWhite.Domain.ValueObjects.Category;
 using RedAndWhite.Model.Brands;
+using RedAndWhite.Model.Categories;
 using RedAndWhite.Repository.Brands;
 using RedAndWhite.Service.Common;
 using System.Linq.Expressions;
@@ -11,16 +13,19 @@ namespace RedAndWhite.Service.Brands
 {
     public class BrandService : ServiceBase<Brand, IBrandRepository>, IBrandService, IBrandDomainService
     {
-        private readonly IResultVerifier _resultVerifier;
-
         const string BrandType = "Brand";
 
+        private readonly IResultVerifier _resultVerifier;
+        private readonly ICategoryDomainService _categoryDomainService;
+
         public BrandService(IBrandRepository repository,
+                            ICategoryDomainService categoryDomainService,
                             IResultVerifier resultVerifier,
                             IMapper mapper) 
             : base(repository, mapper)
         {
             this._resultVerifier = resultVerifier;
+            this._categoryDomainService = categoryDomainService;
         }
         
         public Brand GetById(int id)
@@ -54,6 +59,17 @@ namespace RedAndWhite.Service.Brands
         //    return base.Repository.GetEntityListByCriteria(GetByIdsExpression(id.BrandIds)).ToList();
         //}
         //private Expression<Func<Brand, bool>> GetByIdsExpression(List<int> ids) => brand => ids.Any(b => brand.Id == b);                
+
+        public List<Brand> GetByCategory(GetCategoryByIdModel categoryModel)
+        {
+            var category = this._categoryDomainService.GetById(base.Mapper.Map<GetCategoryById>(categoryModel));
+
+            var brands = base.Repository.GetEntityListByCriteria(GetByCategoryIdEvaluator(category)).ToList();
+            this._resultVerifier.IfEmptyThrowException(brands);
+
+            return brands;
+        }
+        private Expression<Func<Brand, bool>> GetByCategoryIdEvaluator(Category category) => brand => brand.Categories.Contains(category);
 
         public void Create(NewBrandModel newBrandModel)
         {
