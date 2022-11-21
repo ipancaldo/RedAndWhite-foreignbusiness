@@ -4,7 +4,7 @@
 // Write your JavaScript code.
 
 window.addEventListener('DOMContentLoaded', event => {
-
+    document.body.classList.toggle('nav-open');
     // Toggle the side navigation
     const sidebarToggle = document.body.querySelector('#sidebarToggle');
     if (sidebarToggle) {
@@ -22,8 +22,8 @@ window.addEventListener('DOMContentLoaded', event => {
 
 const navToggle = document.querySelector('.nav-toggle');
 
-
 navToggle.addEventListener('click', () => {
-    document.body.classList.toggle('nav-open');
+    if (document.body.classList != 'nav-open sb-sidenav-toggled') 
+        document.body.classList.toggle('nav-open');
 });
 

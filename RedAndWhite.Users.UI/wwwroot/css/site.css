@@ -3,24 +3,24 @@ html {
 }
 
 @media (min-width: 768px) {
-  html {
-    font-size: 16px;
-  }
+    html {
+        font-size: 16px;
+    }
 }
 
 html {
-  position: relative;
-  min-height: 100%;
+    position: relative;
+    min-height: 100%;
 }
 
 body {
-  margin-bottom: 60px;
+    margin-bottom: 60px;
 }
 
 .logo-banner {
     width: 100px;
     margin-left: 20px;
-    margin-right:20px;
+    margin-right: 20px;
 }
 
 .jumbotron {
@@ -35,9 +35,10 @@ body {
     margin-top: 200px;
 }
 
-.cointainer-cards{
-    background-color:cadetblue;
+.cointainer-cards {
+    background-color: cadetblue;
 }
+
 .imagen {
     display: flex;
     align-items: center;
@@ -83,6 +84,8 @@ body {
     width: auto !important;
     height: 500px;
     max-height: 500px;
+}
+
 #wrapper {
     overflow-x: hidden;
 }
@@ -96,14 +99,14 @@ body {
     transition: margin .25s ease-out;
 }
 
-    #sidebar-wrapper .sidebar-heading {
-        padding: 0.875rem 1.25rem;
-        font-size: 1.2rem;
-    }
+#sidebar-wrapper .sidebar-heading {
+    padding: 0.875rem 1.25rem;
+    font-size: 1.2rem;
+}
 
-    #sidebar-wrapper .list-group {
-        width: 15rem;
-    }
+#sidebar-wrapper .list-group {
+    width: 15rem;
+}
 
 #page-content-wrapper {
     min-width: 100vw;
@@ -149,43 +152,43 @@ body.sb-sidenav-toggled #wrapper #sidebar-wrapper {
     background: #303030;
 }
 
-    .nav-open .hamburger::after {
-        opacity: 0;
-    }
+.nav-open .hamburger::after {
+    opacity: 0;
+}
 
-    .nav-open .hamburger::before {
-        transform: rotate(90deg) translateX(6px);
-        background: #303030;
-    }
+.nav-open .hamburger::before {
+    transform: rotate(90deg) translateX(6px);
+    background: #303030;
+}
 
 .hamburger {
     display: block;
     position: relative;
 }
 
-    .hamburger,
-    .hamburger::before,
-    .hamburger::after {
-        display: block;
-        background: #303030;
-        width: 2em;
-        height: 3px;
-        border-radius: 1em;
-        transition: transform 250ms ease-in-out;
-    }
+.hamburger,
+.hamburger::before,
+.hamburger::after {
+    display: block;
+    background: #303030;
+    width: 2em;
+    height: 3px;
+    border-radius: 1em;
+    transition: transform 250ms ease-in-out;
+}
 
-        .hamburger::before,
-        .hamburger::after {
-            content: '';
-            position: absolute;
-            left: 0;
-            right: 0;
-        }
+.hamburger::before,
+.hamburger::after {
+    content: '';
+    position: absolute;
+    left: 0;
+    right: 0;
+}
 
-        .hamburger::before {
-            top: -6px
-        }
+.hamburger::before {
+    top: -6px
+}
 
-        .hamburger::after {
-            top: 6px
-        }
+.hamburger::after {
+    top: 6px
+}
