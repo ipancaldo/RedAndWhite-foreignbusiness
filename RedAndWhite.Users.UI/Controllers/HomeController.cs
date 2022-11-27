@@ -10,7 +10,7 @@ namespace RedAndWhite.Users.UI.Controllers
         private readonly ILogger<HomeController> _logger;
         private readonly IProductService _productService;
 
-        public HomeController(//ILogger<HomeController> logger,
+        public HomeController(ILogger<HomeController> logger,
                               IProductService productService
             )
         {
