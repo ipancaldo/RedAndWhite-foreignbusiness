@@ -34,7 +34,7 @@ namespace RedAndWhite.Service.Products
 
         public List<ProductModel> GetAllProducts()
         {
-            return base.Mapper.Map<List<ProductModel>>(base.Repository.GetAll());
+            return base.Mapper.Map<List<ProductModel>>(base.Repository.GetAll().ToList());
         }
 
         public Product GetProductById(int id)
