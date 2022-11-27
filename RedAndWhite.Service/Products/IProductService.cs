@@ -7,6 +7,8 @@ namespace RedAndWhite.Service.Products
 {
     public interface IProductService : IServiceBase<Product>
     {
+        List<ProductModel> GetAllProducts();
+
         Product GetProductById(int id);
 
         List<Product> GetByCategory(GetProductsByCategoryModel categoryModel);

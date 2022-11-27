@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using RedAndWhite.Service.Products;
 using RedAndWhite.Users.UI.Models;
 using System.Diagnostics;
 
@@ -7,14 +8,19 @@ namespace RedAndWhite.Users.UI.Controllers
     public class HomeController : Controller
     {
         private readonly ILogger<HomeController> _logger;
+        private readonly IProductService _productService;
 
-        public HomeController(ILogger<HomeController> logger)
+        public HomeController(//ILogger<HomeController> logger,
+                              IProductService productService
+            )
         {
             _logger = logger;
+            _productService = productService;
         }
 
         public IActionResult Index()
         {
+            var test = _productService.GetAllProducts();
             return View();
         }
 

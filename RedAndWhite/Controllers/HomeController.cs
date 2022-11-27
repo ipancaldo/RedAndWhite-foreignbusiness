@@ -25,9 +25,9 @@ namespace RedAndWhite.Controllers
                               IBrandService brandService,
                               ICategoryService categoryService)
         {
-            this._productsService = productsService;
-            this._brandService = brandService;
-            this._categoryService = categoryService;
+            _productsService = productsService;
+            _brandService = brandService;
+            _categoryService = categoryService;
         }
 
         public IActionResult Index()
@@ -36,7 +36,7 @@ namespace RedAndWhite.Controllers
             {
                 var test = TestGetBrandsByCategory(2);
 
-                return View(this._productsService.GetAll().ToList());
+                return View(_productsService.GetAll().ToList());
             }
             catch (Exception ex)
             {
@@ -75,7 +75,7 @@ namespace RedAndWhite.Controllers
                 Name = productName,
                 Description = description
             };
-            this._productsService.Create(newProductModel);
+            _productsService.Create(newProductModel);
         }
 
         private void TestModifyProduct(int id, string name, string? description)
@@ -86,12 +86,12 @@ namespace RedAndWhite.Controllers
                 Name = name,
                 Description = description
             };
-            this._productsService.ModifyProperties(modifyPropertiesProduct);
+            _productsService.ModifyProperties(modifyPropertiesProduct);
         }
 
         private void TestDeleteProduct(int id)
         {
-            this._productsService.Delete(id);
+            _productsService.Delete(id);
         }
 
         private void TestCreateNewBrand(string brandName)
@@ -100,12 +100,12 @@ namespace RedAndWhite.Controllers
             {
                 BrandName = brandName
             };
-            this._brandService.Create(newBrandModel);
+            _brandService.Create(newBrandModel);
         }
 
         private void TestDeleteBrand(int id)
         {
-            this._brandService.Delete(id);
+            _brandService.Delete(id);
         }
 
         private void TestModifyBrand(int id, string name)
@@ -115,17 +115,17 @@ namespace RedAndWhite.Controllers
                 Id = id,
                 Name = name
             };
-            this._brandService.Modify(modifyPropertiesBrand);
+            _brandService.Modify(modifyPropertiesBrand);
         }
 
         private List<Product> TestOrderByProduct()
         {
-            return this._productsService.OrderBy();
+            return _productsService.OrderBy();
         }
 
         private List<Brand> TestOrderByBrand()
         {
-            return this._brandService.OrderBy();
+            return _brandService.OrderBy();
         }
 
         private void TestAssignBrandToProduct(int productId, int brandId)
@@ -135,17 +135,17 @@ namespace RedAndWhite.Controllers
                 ProductId = productId,
                 BrandId = brandId
             };
-            this._productsService.AssignBrand(addProductBrandModel);
+            _productsService.AssignBrand(addProductBrandModel);
         }
 
         private void TestGetBrandById(int id)
         {
-            this._brandService.GetById(id);
+            _brandService.GetById(id);
         }
 
         private void TestDomainGetBrandById(int id)
         {
-            this._brandService.GetById(id);
+            _brandService.GetById(id);
         }
 
         private void TestRemoveBrand(int productId, int brandId)
@@ -155,7 +155,7 @@ namespace RedAndWhite.Controllers
                 ProductId = productId,
                 BrandId = brandId
             };
-            this._productsService.RemoveBrand(removeProductBrandModel);
+            _productsService.RemoveBrand(removeProductBrandModel);
         }
 
         private void TestAssignCategory(int categoryId, int productId)
@@ -165,7 +165,7 @@ namespace RedAndWhite.Controllers
                 CategoryId = categoryId,
                 ProductId = productId,
             };
-            this._productsService.AssignCategory(assignCategoryModel);
+            _productsService.AssignCategory(assignCategoryModel);
         }
 
         private void TestRemoveCategory(int productId, int categoryId)
@@ -175,12 +175,12 @@ namespace RedAndWhite.Controllers
                 ProductId = productId,
                 CategoryId = categoryId
             };
-            this._productsService.RemoveCategory(removeCategoryFromProductModel);
+            _productsService.RemoveCategory(removeCategoryFromProductModel);
         }
 
         private List<Category> TestOrderByCategory()
         {
-            return this._categoryService.OrderBy();
+            return _categoryService.OrderBy();
         }
 
         private void TestCreateCategory(string categoryName)
@@ -190,7 +190,7 @@ namespace RedAndWhite.Controllers
                 CategoryName = categoryName
             };
 
-            this._categoryService.Create(newCategoryModel);
+            _categoryService.Create(newCategoryModel);
         }
 
         private List<Product> TestGetProductsByCategory(string categoryName)
@@ -200,7 +200,7 @@ namespace RedAndWhite.Controllers
                 CategoryName = categoryName
             };
 
-            return this._productsService.GetByCategory(getProductsByCategoryModel);
+            return _productsService.GetByCategory(getProductsByCategoryModel);
         }
 
         private List<Brand> TestGetBrandsByCategory(int categoryId)
@@ -210,7 +210,7 @@ namespace RedAndWhite.Controllers
                 CategoryId = categoryId
             };
 
-            return this._brandService.GetByCategory(categoryModel);
+            return _brandService.GetByCategory(categoryModel);
         }
     }
 }

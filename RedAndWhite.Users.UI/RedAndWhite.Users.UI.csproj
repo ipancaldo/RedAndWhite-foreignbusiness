@@ -10,4 +10,8 @@
     <PackageReference Include="bootstrap" Version="5.2.1" />
   </ItemGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\RedAndWhite.Service\RedAndWhite.Service.csproj" />
+  </ItemGroup>
+
 </Project>
