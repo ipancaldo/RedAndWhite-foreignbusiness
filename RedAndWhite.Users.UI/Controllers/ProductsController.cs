@@ -14,8 +14,7 @@ namespace RedAndWhite.Users.UI.Controllers
 
         public IActionResult Index()
         {
-            var test = _productService.GetAllProducts();
-            return View();
+            return View(_productService.GetAllProducts());
         }
     }
 }

@@ -14,22 +14,22 @@ namespace RedAndWhite.Repository
 
         public BaseRepository(RedAndWhiteContext redAndWhiteContext)
         {
-            this._redAndWhiteContext = redAndWhiteContext;
-            this.DbSet = redAndWhiteContext.Set<TDomain>();
+            _redAndWhiteContext = redAndWhiteContext;
+            DbSet = redAndWhiteContext.Set<TDomain>();
         }
 
-        public IEnumerable<TDomain> GetAll() => this.DbSet.AsEnumerable<TDomain>();
+        public IEnumerable<TDomain> GetAll() => DbSet.AsEnumerable<TDomain>();
 
-        public IEnumerable<TDomain> GetEntityListByCriteria(Expression<Func<TDomain, bool>> predicate) => this.DbSet.Where(predicate).ToList();
+        public IEnumerable<TDomain> GetEntityListByCriteria(Expression<Func<TDomain, bool>> predicate) => DbSet.Where(predicate).ToList();
         
-        public void Add(TDomain entity) => this._redAndWhiteContext.Add(entity);
+        public void Add(TDomain entity) => _redAndWhiteContext.Add(entity);
 
-        public void Delete(TDomain entity) => this.DbSet.Remove(entity);
+        public void Delete(TDomain entity) => DbSet.Remove(entity);
 
-        public TDomain GetEntityByCriteria(Expression<Func<TDomain, bool>> predicate) => this.DbSet.FirstOrDefault(predicate)!;
+        public TDomain GetEntityByCriteria(Expression<Func<TDomain, bool>> predicate) => DbSet.FirstOrDefault(predicate)!;
 
-        public IEnumerable<TDomain> OrderBy(Expression<Func<TDomain, string>> predicate) => (IEnumerable<TDomain>)this.DbSet.OrderBy(predicate);
+        public IEnumerable<TDomain> OrderBy(Expression<Func<TDomain, string>> predicate) => (IEnumerable<TDomain>)DbSet.OrderBy(predicate);
 
-        public void SaveChanges() => this._redAndWhiteContext.SaveChanges();
+        public void SaveChanges() => _redAndWhiteContext.SaveChanges();
     }
 }
