@@ -53,6 +53,8 @@ namespace RedAndWhite.Service.Products
             return products.ToList();
         }
         private Expression<Func<Product, bool>> GetByCategoryCriteria(Category category) => product => product.Categories.Contains(category);
+        //private Expression<Func<Product, bool>> GetByCategoryCriteria(Category category) => product => product.Categories.Any(c => c.Name.ToLower() == category.Name.ToLower());
+
 
         public void Create(NewProductModel newProductModel)
         {
