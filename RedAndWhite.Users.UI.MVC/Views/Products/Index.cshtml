@@ -29,7 +29,7 @@
                     </h2>
                     <div id="flush-collapseOne" class="accordion-collapse collapse" aria-labelledby="flush-headingOne" data-bs-parent="#accordionFlushExample">
                         <div class="accordion-body list-group-flush">
-                            <a class="list-group-item list-group-item-action list-group-item-light" href="@Url.Action("Test", "Products")">Caramelos blandos</a>
+                            <a class="list-group-item list-group-item-action list-group-item-light" href="@Url.Action("Index", "Products", new {category = "New category test"})">Caramelos blandos</a>
                             <a class="list-group-item list-group-item-action list-group-item-light" href="#!">Caramelos duros</a>
                             <a class="list-group-item list-group-item-action list-group-item-light" href="#!">Chocolates</a>
                             <a class="list-group-item list-group-item-action list-group-item-light" href="#!">Galletitas</a>
@@ -71,17 +71,7 @@
         </button>
         <div class="container-fluid p-5">
             <div class="row">
-                @foreach (var product in Model)
-                {
-                    <div class="card m-1" style="width: 18rem;">
-                        <img src="~/images/Masticables/masticables_Banana.png" class="card-img-top" alt="...">
-                        <div class="card-body">
-                            <h5 class="card-title">@product.Name</h5>
-                            <p class="card-text">@product.Description</p>
-                            <a href="#" class="btn btn-primary">Go somewhere</a>
-                        </div>
-                    </div>
-                }
+                <partial name="_ProductsList"  />
             </div>
         </div>
     </div>

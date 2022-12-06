@@ -8,6 +8,7 @@ using RedAndWhite.Model.Categories;
 using RedAndWhite.Model.Products;
 using RedAndWhite.Repository.Products;
 using RedAndWhite.Service.Common;
+using System.Collections.Generic;
 using System.Linq.Expressions;
 
 namespace RedAndWhite.Service.Products
@@ -43,18 +44,16 @@ namespace RedAndWhite.Service.Products
         }
         private Expression<Func<Product, bool>> GetByIdEvaluator(int id) => user => user.Id.Equals(id);
 
-        public List<Product> GetByCategory(GetProductsByCategoryModel getProductsByCategoryModel)
+        public List<ProductModel> GetByCategory(GetProductsByCategoryModel getProductsByCategoryModel)
         {
             var category = _categoryDomainService.GetByName(base.Mapper.Map<CategoryToGet>(getProductsByCategoryModel));
 
             var products = base.Repository.GetEntityListByCriteria(GetByCategoryCriteria(category));
             _resultVerifier.IfEmptyThrowException(products.ToList());
 
-            return products.ToList();
+            return base.Mapper.Map<List<ProductModel>>(products.ToList());
         }
         private Expression<Func<Product, bool>> GetByCategoryCriteria(Category category) => product => product.Categories.Contains(category);
-        //private Expression<Func<Product, bool>> GetByCategoryCriteria(Category category) => product => product.Categories.Any(c => c.Name.ToLower() == category.Name.ToLower());
-
 
         public void Create(NewProductModel newProductModel)
         {

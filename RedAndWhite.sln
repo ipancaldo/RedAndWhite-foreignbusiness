@@ -19,6 +19,10 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "RedAndWhite.Infrastructure"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RedAndWhite.Users.UI", "RedAndWhite.Users.UI\RedAndWhite.Users.UI.csproj", "{6939364E-A2E7-4D8C-B94D-4D55F398DD57}"
 EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "RedAndWhite.Users.UI.MVC", "RedAndWhite.Users.UI.MVC\RedAndWhite.Users.UI.MVC.csproj", "{6658D534-F97D-4A46-A46D-41D35B96DB77}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "RedAndWhite.API", "RedAndWhite.API\RedAndWhite.API.csproj", "{119EC611-D69F-418D-8189-BAB6B5EC35AA}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -57,6 +61,14 @@ Global
 		{6939364E-A2E7-4D8C-B94D-4D55F398DD57}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{6939364E-A2E7-4D8C-B94D-4D55F398DD57}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{6939364E-A2E7-4D8C-B94D-4D55F398DD57}.Release|Any CPU.Build.0 = Release|Any CPU
+		{6658D534-F97D-4A46-A46D-41D35B96DB77}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{6658D534-F97D-4A46-A46D-41D35B96DB77}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{6658D534-F97D-4A46-A46D-41D35B96DB77}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{6658D534-F97D-4A46-A46D-41D35B96DB77}.Release|Any CPU.Build.0 = Release|Any CPU
+		{119EC611-D69F-418D-8189-BAB6B5EC35AA}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{119EC611-D69F-418D-8189-BAB6B5EC35AA}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{119EC611-D69F-418D-8189-BAB6B5EC35AA}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{119EC611-D69F-418D-8189-BAB6B5EC35AA}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

@@ -11,7 +11,7 @@ namespace RedAndWhite.Service.Products
 
         Product GetProductById(int id);
 
-        List<Product> GetByCategory(GetProductsByCategoryModel categoryModel);
+        List<ProductModel> GetByCategory(GetProductsByCategoryModel categoryModel);
 
         void Create(NewProductModel newProductModel);
 
