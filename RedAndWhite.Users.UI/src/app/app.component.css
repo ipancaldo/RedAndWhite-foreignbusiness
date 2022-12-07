@@ -23,68 +23,13 @@ body {
     margin-right: 20px;
 }
 
-.jumbotron {
-    margin-top: 60px;
-    margin-right: 0px;
-    margin-bottom: 10px;
-    margin-left: 0px;
-    margin-top: 60px;
-}
-
-.displayAni {
-    margin-top: 200px;
-}
-
-.cointainer-cards {
-    background-color: cadetblue;
-}
-
-.imagen {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-}
-
-.card-marcas {
-    flex: 1 150px;
-    /*    include: margenes(3px, 9px, 10px, 5px);*/
-    margin: 3px 9px 10px 5px;
-    padding: 10px;
-    border-radius: 10px;
-    max-width: 150px;
-}
-
-.card-marcas-img {
-    max-width: 150px;
-    max-height: 70px;
-    width: 100% !important;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-}
-
-.card-background {
-    background: white;
-}
-
-.card-marcas-img-div {
-    height: 60px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-}
-/*.imagen-marca {
-    width: 100% !important;
-    max-width: 5px !important;
-}
-*/
-.w-100 {
-    /* width: 50% !important;*/
+/* .w-100 {
+    -- width: 50% !important;
     margin: auto;
     width: auto !important;
     height: 500px;
     max-height: 500px;
-}
+} */
 
 #wrapper {
     overflow-x: hidden;

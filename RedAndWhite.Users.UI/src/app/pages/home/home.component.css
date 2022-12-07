@@ -1,0 +1,24 @@
+.brand-card {
+    flex: 1 150px;
+    margin: 3px 9px 10px 5px;
+    padding: 10px;
+    border-radius: 10px;
+    max-width: 150px;
+    background: white;
+}
+
+.brand-card-img {
+    max-width: 150px;
+    max-height: 70px;
+    width: 100% !important;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.brand-card-img-div {
+    height: 60px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
