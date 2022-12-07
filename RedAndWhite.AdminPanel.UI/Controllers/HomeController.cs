@@ -193,7 +193,7 @@ namespace RedAndWhite.Controllers
             _categoryService.Create(newCategoryModel);
         }
 
-        private List<Product> TestGetProductsByCategory(string categoryName)
+        private List<ProductModel> TestGetProductsByCategory(string categoryName)
         {
             GetProductsByCategoryModel getProductsByCategoryModel = new GetProductsByCategoryModel()
             {
