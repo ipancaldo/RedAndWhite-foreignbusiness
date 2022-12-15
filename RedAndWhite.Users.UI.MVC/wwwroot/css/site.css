@@ -1,16 +1,13 @@
 html {
     font-size: 14px;
+    position: relative;
+    min-height: 100%;
 }
 
 @media (min-width: 768px) {
     html {
         font-size: 16px;
     }
-}
-
-html {
-    position: relative;
-    min-height: 100%;
 }
 
 body {
@@ -31,30 +28,15 @@ body {
     margin-top: 60px;
 }
 
-.displayAni {
-    margin-top: 200px;
-}
-
-.cointainer-cards {
-    background-color: cadetblue;
-}
-
-.imagen {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-}
-
-.card-marcas {
+.brand-card {
     flex: 1 150px;
-    /*    include: margenes(3px, 9px, 10px, 5px);*/
     margin: 3px 9px 10px 5px;
     padding: 10px;
     border-radius: 10px;
     max-width: 150px;
 }
 
-.card-marcas-img {
+.brand-card-img {
     max-width: 150px;
     max-height: 70px;
     width: 100% !important;
@@ -63,27 +45,11 @@ body {
     justify-content: center;
 }
 
-.card-background {
-    background: white;
-}
-
-.card-marcas-img-div {
+.brand-card-img-div {
     height: 60px;
     display: flex;
     align-items: center;
     justify-content: center;
-}
-/*.imagen-marca {
-    width: 100% !important;
-    max-width: 5px !important;
-}
-*/
-.w-100 {
-    /* width: 50% !important;*/
-    margin: auto;
-    width: auto !important;
-    height: 500px;
-    max-height: 500px;
 }
 
 #wrapper {
@@ -91,6 +57,8 @@ body {
 }
 
 #sidebar-wrapper {
+    /*position: fixed;*/
+    /*z-index: 10;*/
     min-height: 100vh;
     margin-left: -15rem;
     -webkit-transition: margin .25s ease-out;
@@ -141,10 +109,6 @@ body.sb-sidenav-toggled #wrapper #sidebar-wrapper {
     border: 0;
     cursor: pointer;
     z-index: 1000;
-}
-
-.nav-open .nav-toggle {
-    position: fixed;
 }
 
 .nav-open .hamburger {
