@@ -1,0 +1,21 @@
+﻿@model List<RedAndWhite.Model.Brands.BrandModel>
+
+@foreach (var brand in Model)
+{
+    <div class="brand-card d-flex flex-column justify-content-between card-background">
+        <div class="brand-card-img-div">
+            <img class="background-white brand-card-img" src="@brand.Image" alt="Card image cap">
+        </div>
+        <div>
+            <h5 class="card-title">@brand.BrandName</h5>
+        </div>
+        <div>
+            <p class="card-text">@brand.Description</p>
+        </div>
+        <div class="pt-2">
+            @if(brand.Website != null){
+                <a href="@brand.Website" target="_blank" class="btn btn-primary float-end">Visitar web</a>
+            }
+        </div>
+    </div>
+}

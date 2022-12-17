@@ -1,9 +1,9 @@
-﻿using RedAndWhite.Domain.ValueObjects.Brand;
+﻿using RedAndWhite.Domain;
 using RedAndWhite.Infrastructure.Mapping;
 
 namespace RedAndWhite.Model.Brands
 {
-    public class NewBrandModel : IMapFrom<NewBrand>
+    public class BrandModel : IMapFrom<Brand>
     {
         public string BrandName { get; set; }
         public string Description { get; set; }

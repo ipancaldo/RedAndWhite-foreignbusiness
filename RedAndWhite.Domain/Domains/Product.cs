@@ -20,7 +20,7 @@ namespace RedAndWhite.Domain
         [Required, MaxLength(200)]
         public string Description { get; private set; }
 
-        public byte[]? Image { get; set; }
+        public string? Image { get; set; }
 
         public virtual List<Category> Categories { get; private set; }
 
@@ -28,46 +28,47 @@ namespace RedAndWhite.Domain
 
         public void Create(NewProduct newProduct)
         {
-            this.Name = newProduct.Name;
-            this.Description = newProduct.Description;
+            Name = newProduct.Name;
+            Description = newProduct.Description;
         }
 
+        //TODO: Modify this for new properties
         public void ModifyProperties(ModifyPropertiesProduct modifyPropertiesProduct)
         {
             if (modifyPropertiesProduct.Name.Count() < 2)
                 throw new Exception($"The name of the producy cannot be less than 2 characters.");
 
-            if (this.Name.ToLower() != modifyPropertiesProduct.Name.ToLower() &&
+            if (Name.ToLower() != modifyPropertiesProduct.Name.ToLower() &&
                 !string.IsNullOrEmpty(modifyPropertiesProduct.Name))
-                this.Name = modifyPropertiesProduct.Name;
+                Name = modifyPropertiesProduct.Name;
 
-            if (this.Description.ToLower() != modifyPropertiesProduct.Description.ToLower() &&
+            if (Description.ToLower() != modifyPropertiesProduct.Description.ToLower() &&
                 !string.IsNullOrEmpty(modifyPropertiesProduct.Description))
-                this.Description = modifyPropertiesProduct.Description;
+                Description = modifyPropertiesProduct.Description;
 
-            if (this.Image != modifyPropertiesProduct.Image &&
-                modifyPropertiesProduct.Image is not null)
-                this.Image = modifyPropertiesProduct.Image;
+            //if (this.Image != modifyPropertiesProduct.Image &&
+            //    modifyPropertiesProduct.Image is not null)
+            //    this.Image = modifyPropertiesProduct.Image;
         }
 
         public void AssignBrand(Brand brand)
         {
             if(DoExistInBrands(brand)) return;
 
-            this.Brands.Add(brand);
+            Brands.Add(brand);
         }
 
         private bool DoExistInBrands(Brand brand)
         {
-            return this.Brands.Any(b => b.Name.ToLower() == brand.Name.ToLower());
+            return Brands.Any(b => b.Name.ToLower() == brand.Name.ToLower());
         }
 
         public void RemoveBrand(Brand brand)
         {
-            var brandInProduct = this.Brands.FirstOrDefault(b => b.Name.ToLower() == brand.Name.ToLower());
+            var brandInProduct = Brands.FirstOrDefault(b => b.Name.ToLower() == brand.Name.ToLower());
             if (brandInProduct is default(Brand)) return;
 
-            this.Brands.Remove(brandInProduct!);
+            Brands.Remove(brandInProduct!);
         }
 
         public void AssignCategory(Category category)
@@ -79,15 +80,15 @@ namespace RedAndWhite.Domain
 
         private bool DoExistInCategories(Category category)
         {
-            return this.Categories.Any(b => b.Name.ToLower() == category.Name.ToLower());
+            return Categories.Any(b => b.Name.ToLower() == category.Name.ToLower());
         }
 
         public void RemoveCategory(Category category)
         {
-            var categoryInProduct = this.Categories.FirstOrDefault(b => b.Name.ToLower() == category.Name.ToLower());
+            var categoryInProduct = Categories.FirstOrDefault(b => b.Name.ToLower() == category.Name.ToLower());
             if (categoryInProduct is default(Category)) return;
 
-            this.Categories.Remove(categoryInProduct!);
+            Categories.Remove(categoryInProduct!);
         }
     }
 }

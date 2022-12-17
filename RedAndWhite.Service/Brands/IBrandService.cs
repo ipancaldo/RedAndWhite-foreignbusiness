@@ -7,6 +7,8 @@ namespace RedAndWhite.Service.Brands
 {
     public interface IBrandService : IServiceBase<Brand>
     {
+        List<BrandModel> GetAllBrands();
+
         Brand GetById(int id);
 
         List<Brand> GetByCategory(GetCategoryByIdModel categoryModel);

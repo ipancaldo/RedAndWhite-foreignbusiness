@@ -7,8 +7,8 @@ namespace RedAndWhite.Domain
     {
         public Brand()
         {
-            this.Products = new List<Product>();
-            this.Categories = new List<Category>();
+            Products = new List<Product>();
+            Categories = new List<Category>();
         }
 
         [Key]
@@ -17,18 +17,27 @@ namespace RedAndWhite.Domain
         [Required, MaxLength(150)]
         public string Name { get; private set; }
 
+        [MaxLength(250)]
+        public string? Description { get; set; }
+
+        [MaxLength(250)]
+        public string? Image { get; set; }
+
+        [MaxLength(250)]
+        public string? Website { get; set; }
+
         public virtual List<Product> Products { get; set; }
 
         public virtual List<Category> Categories { get; set; }
 
         public void Create(NewBrand newBrand)
         {
-            this.Name = newBrand.BrandName;
+            Name = newBrand.BrandName;
         }
 
         public void Modify(ModifyPropertiesBrand modifyPropertiesBrand)
         {
-            this.Name = modifyPropertiesBrand.Name;
+            Name = modifyPropertiesBrand.Name;
         }
     }
 }

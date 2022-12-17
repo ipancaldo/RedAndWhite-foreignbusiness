@@ -17,7 +17,7 @@ namespace RedAndWhite.Model.Products
 
         public string Description { get; private set; }
 
-        public byte[]? Image { get; set; }
+        public string? Image { get; set; }
 
         public virtual List<Category> Categories { get; private set; }
 

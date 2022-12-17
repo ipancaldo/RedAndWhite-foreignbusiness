@@ -18,7 +18,7 @@ namespace RedAndWhite.Domain
 
         public void Create(NewCategory newCategory)
         {
-            this.Name = newCategory.CategoryName;
+            Name = newCategory.CategoryName;
         }
     }
 }

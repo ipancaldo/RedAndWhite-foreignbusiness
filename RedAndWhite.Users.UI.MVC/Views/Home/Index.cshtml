@@ -4,7 +4,7 @@
 
 <!-- HEADER -->
 <div class="jumbotron jumbotron-fluid">
-    <div class="container">
+    <div class="container p-5">
         <h1 class="display-4">Nos dedicamos al comercio exterior</h1>
         <p class="lead">
             DESDE 1990, IMPORTANDO Y EXPORTANDO PRODUCTOS DE PRIMERA CALIDAD,
@@ -16,80 +16,6 @@
 <div class="container-fluid mt-3">
     <h3 class="text-white">Marcas con las que trabajamos</h3>
     <div class="d-flex flex-wrap justify-content-center pt-3">
-        <div class="brand-card d-flex flex-column justify-content-between card-background">
-            <div class="brand-card-img-div">
-                <img class="background-white brand-card-img" src="images/Marcas/pietrobon.png" alt="Card image cap">
-            </div>
-            <div>
-                <h5 class="card-title">Pietrobon</h5>
-            </div>
-            <div>
-                <p class="card-text">Empresa brasilera dedicada a la producción de golosinas y de caños.</p>
-            </div>
-            <div class="pt-2">
-                <a href="https://www.pietrobon.com.br/" target="_blank" class="btn btn-primary float-end">Visitar web</a>
-            </div>
-        </div>
-        <div class="brand-card d-flex flex-column justify-content-between card-background">
-            <div>
-
-                <img class="card-img-top brand-card-img" src="images/Marcas/Logo Santa Rita.png"
-                     alt="Card image cap">
-                <h5 class="card-title">Santa rita</h5>
-                <p class="card-text">Empresa brasilera dedicada a productos alimenticios varios./p>
-            </div>
-            <div class="pt-2">
-                <a href="https://www.pietrobon.com.br/" target="_blank" class="btn btn-primary float-end">Visitar web</a>
-            </div>
-        </div>
-        <div class="brand-card d-flex flex-column justify-content-between card-background">
-            <div>
-                <img class="card-img-top brand-card-img" src="images/Marcas/Logo.png"
-                     alt="Card image cap">
-                <h5 class="card-title">Q10</h5>
-                <p class="card-text">Empresa brasilera dedicada a la producción de alimentos tipo tentempié salados.</p>
-            </div>
-            <div class="pt-2">
-                <a href="https://www.pietrobon.com.br/" target="_blank" class="btn btn-primary float-end">Visitar web</a>
-            </div>
-        </div>
-        <div class="brand-card d-flex flex-column justify-content-between card-background">
-            <div>
-                <img class="card-img-top brand-card-img" src="images/Marcas/Barrichello.png"
-                     alt="Card image cap">
-                <h5 class="card-title">Barrichello</h5>
-                <p class="card-text">Empresa brasilera dedicada a la producción de bombillas.</p>
-            </div>
-            <div class="pt-2">
-                <a href="https://www.pietrobon.com.br/" target="_blank" class="btn btn-primary float-end">Visitar web</a>
-            </div>
-        </div>
-        <div class="brand-card d-flex flex-column justify-content-between card-background">
-            <div>
-                <img class="card-img-top brand-card-img" src="images/Marcas/Saadet.png"
-                     alt="Card image cap">
-                <h5 class="card-title">Saadet</h5>
-                <p class="card-text">Empresa turca dedicada a la producción de golosinas varias.</p>
-            </div>
-            <div class="pt-2">
-                <a href="https://www.pietrobon.com.br/" target="_blank" class="btn btn-primary float-end">Visitar web</a>
-            </div>
-        </div>
-        <div class="brand-card d-flex flex-column justify-content-between card-background">
-            <div>
-                <h3><span class="badge badge-secondary">Nuevo!</span></h3>
-                <img class="card-img-top card-marcas-img" src="images/Marcas/Trams.png"
-                     alt="Card image cap">
-                <!-- TOOLTIP -->
-                <h5 class="card-title" data-toggle="tooltip" data-placement="top"
-                    title="Empresa brasilera de productos de primera calidad">
-                    Tram's
-                </h5>
-                <p class="card-text">Empresa brasilera dedicada a la producción de golosinas.</p>
-            </div>
-            <div class="pt-2">
-                <a href="https://www.pietrobon.com.br/" target="_blank" class="btn btn-primary float-end">Visitar web</a>
-            </div>
-        </div>
+        @Html.Partial("_BrandsList", (List<RedAndWhite.Model.Brands.BrandModel>)ViewBag.Brands)      
     </div>
 </div>

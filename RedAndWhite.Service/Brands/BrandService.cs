@@ -28,6 +28,11 @@ namespace RedAndWhite.Service.Brands
             this._categoryDomainService = categoryDomainService;
         }
         
+        public List<BrandModel> GetAllBrands()
+        {
+            return base.Mapper.Map<List<BrandModel>>(base.Repository.GetAll().ToList());
+        }
+
         public Brand GetById(int id)
         {
             var brand = base.Repository.GetEntityByCriteria(GetByIdEvaluator(id));

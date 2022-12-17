@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using RedAndWhite.Service.Brands;
 using RedAndWhite.Users.UI.Models;
 using System.Diagnostics;
 
@@ -7,16 +8,26 @@ namespace RedAndWhite.Users.UI.Controllers
     public class HomeController : Controller
     {
         private readonly ILogger<HomeController> _logger;
-        
+        private readonly IBrandService _brandService;
 
-        public HomeController(ILogger<HomeController> logger)
+        public HomeController(ILogger<HomeController> logger,
+                              IBrandService brandService)
         {
             _logger = logger;
+            _brandService = brandService;
         }
 
         public IActionResult Index()
         {
-            return View();
+            try
+            {
+                ViewBag.Brands = _brandService.GetAllBrands();
+                return View(_brandService.GetAllBrands());
+            }
+            catch (Exception ex)
+            {
+                throw;
+            }
         }
 
         public IActionResult Privacy()
