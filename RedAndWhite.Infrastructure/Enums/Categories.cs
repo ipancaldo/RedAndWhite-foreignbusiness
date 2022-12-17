@@ -2,8 +2,8 @@
 {
     public enum Categories
     {
-        Chewy = 1,
-        Hard,
+        CandyChewy = 1,
+        CandyHard,
         Chocolates,
         Cookies
     }

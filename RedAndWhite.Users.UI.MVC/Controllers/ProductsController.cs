@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using RedAndWhite.Infrastructure.Enums;
 using RedAndWhite.Infrastructure.Loaders;
 using RedAndWhite.Model.Categories;
 using RedAndWhite.Model.Products;
@@ -16,6 +17,8 @@ namespace RedAndWhite.Users.UI.Controllers
         {
             _modelLoader = modelLoader;
             _productService = productService;
+
+            ViewBag.Categories = Categories.Cookies;
         }
 
         public IActionResult Index(string? category)

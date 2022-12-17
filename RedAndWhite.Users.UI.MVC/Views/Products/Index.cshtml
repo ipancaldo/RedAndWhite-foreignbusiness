@@ -1,20 +1,11 @@
-﻿@model List<RedAndWhite.Model.Products.ProductModel>
+﻿@model List<RedAndWhite.Model.Products.ProductModel>;
+@using RedAndWhite.Infrastructure.Enums;
 
 @*
     For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
 *@
 @{
 }
-<div class="pt-5"></div>
-<div class="jumbotron jumbotron-fluid">
-    <div class="container">
-        <h1 class="display-4">Nos dedicamos al comercio exterior</h1>
-        <p class="lead">
-            DESDE 1990, IMPORTANDO Y EXPORTANDO PRODUCTOS DE PRIMERA CALIDAD,
-            PARA LOS ARGENTINOS.
-        </p>
-    </div>
-</div>
 
 <div class="d-flex" id="wrapper">
     <!-- Sidebar-->
@@ -24,14 +15,14 @@
                 <div class="accordion-item">
                     <h2 class="accordion-header" id="flush-headingOne">
                         <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapseOne" aria-expanded="false" aria-controls="flush-collapseOne">
-                            Caramelos
+                            Golosinas
                         </button>
                     </h2>
                     <div id="flush-collapseOne" class="accordion-collapse collapse" aria-labelledby="flush-headingOne" data-bs-parent="#accordionFlushExample">
                         <div class="accordion-body list-group-flush">
-                            <a class="list-group-item list-group-item-action list-group-item-light" href="@Url.Action("Index", "Products", new {category = "New category test"})">Caramelos blandos</a>
+                            <a class="list-group-item list-group-item-action list-group-item-light" href="@Url.Action("Index", "Products", new {category = Categories.CandyChewy})">Caramelos blandos</a>
                             <a class="list-group-item list-group-item-action list-group-item-light" href="#!">Caramelos duros</a>
-                            <a class="list-group-item list-group-item-action list-group-item-light" href="#!">Chocolates</a>
+                            <a class="list-group-item list-group-item-action list-group-item-light" href="@Url.Action("Index", "Products", new {category = Categories.Chocolates})">Chocolates</a>
                             <a class="list-group-item list-group-item-action list-group-item-light" href="#!">Galletitas</a>
                         </div>
                     </div>

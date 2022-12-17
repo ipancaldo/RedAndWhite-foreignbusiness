@@ -3,7 +3,7 @@
 @foreach (var product in Model)
 {
     <div class="card m-1" style="width: 18rem;">
-        <img src="~/images/Masticables/masticables_Banana.png" class="card-img-top" alt="...">
+        <img src="@product.Image" class="card-img-top" alt="...">
         <div class="card-body">
             <h5 class="card-title">@product.Name</h5>
             <p class="card-text">@product.Description</p>
