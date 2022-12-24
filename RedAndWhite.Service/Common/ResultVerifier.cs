@@ -19,7 +19,7 @@
         public void IfExistsThrowException<T>(T entity, string type)
         {
             if (entity is not null)
-                throw new Exception($"{type} already exist.");
+                throw new Exception($"{type} already exist");
         }
     }
 }

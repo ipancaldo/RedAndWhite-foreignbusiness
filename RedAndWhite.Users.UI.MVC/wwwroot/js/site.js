@@ -23,7 +23,6 @@ window.addEventListener('DOMContentLoaded', event => {
 const navToggle = document.querySelector('.nav-toggle');
 
 navToggle.addEventListener('click', () => {
-    if (document.body.classList != 'nav-open sb-sidenav-toggled') 
+    if (document.body.classList != 'nav-open sb-sidenav-toggled')
         document.body.classList.toggle('nav-open');
 });
-

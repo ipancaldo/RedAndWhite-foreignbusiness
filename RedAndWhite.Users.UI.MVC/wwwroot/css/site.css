@@ -4,9 +4,13 @@ html {
     min-height: 100%;
 }
 
-@media (min-width: 768px) {
+@media (min-width: 590px) {
     html {
         font-size: 16px;
+    }
+
+    .container-fluid {
+        max-width: 1900px;
     }
 }
 
@@ -22,6 +26,26 @@ body {
 
 .container-spacing{
     padding-top: 100px;
+}
+
+.alert {
+    position: fixed;
+    right: 5%;
+    top: 11%;
+}
+
+.accordion-button-restyled {
+    background: none !important;
+    text-decoration: none;
+}
+
+.accordion-button:not(.collapsed) {
+    background-image: none;
+    color: black;
+}
+
+.accordion-button:not(.collapsed)::after {
+    background-image: none;
 }
 
 .brand-card {
@@ -152,3 +176,4 @@ body.sb-sidenav-toggled #wrapper #sidebar-wrapper {
 .hamburger::after {
     top: 6px
 }
+

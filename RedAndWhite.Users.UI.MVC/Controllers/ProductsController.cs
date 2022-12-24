@@ -12,6 +12,8 @@ namespace RedAndWhite.Users.UI.Controllers
         private readonly IModelLoader _modelLoader;
         private readonly IProductService _productService;
 
+        private List<string> _resultVerifier = new() { "There were no coincidences", "don't exist", "already exist" };
+
         public ProductsController(IModelLoader modelLoader, 
                                   IProductService productService)
         {
@@ -25,18 +27,20 @@ namespace RedAndWhite.Users.UI.Controllers
         {
             try
             {
-                List<ProductModel> products = new List<ProductModel>();
-
                 if (!string.IsNullOrEmpty(category))
-                    products = _productService.GetByCategory(_modelLoader.CreateModel<GetProductsByCategoryModel>(new object[] { category }));
+                    return View(_productService.GetByCategory(_modelLoader.CreateModel<GetProductsByCategoryModel>(new object[] { category })));
                 else
-                    products = _productService.GetAllProducts();
-
-                return View(products);
+                    return View(_productService.GetAllProducts());
             }
             catch (Exception ex)
             {
-                throw;
+                if (_resultVerifier.Any(rv => rv == ex.Message))
+                {
+                    TempData["AlertMessage"] = ex.Message;
+                    return RedirectToAction("Index");
+                }
+                    
+                return RedirectToAction("Index", "Error", ex);
             }
         }
     }

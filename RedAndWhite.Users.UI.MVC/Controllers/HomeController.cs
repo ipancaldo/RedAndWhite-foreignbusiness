@@ -22,7 +22,7 @@ namespace RedAndWhite.Users.UI.Controllers
             try
             {
                 ViewBag.Brands = _brandService.GetAllBrands();
-                return View(_brandService.GetAllBrands());
+                return View(ViewBag.Brands);
             }
             catch (Exception ex)
             {
