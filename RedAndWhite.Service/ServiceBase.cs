@@ -16,19 +16,19 @@ namespace RedAndWhite.Service
         public ServiceBase(TRepository repository,
                            IMapper mapper)
         {
-            this.Aggregate = (TDomain)Activator.CreateInstance(typeof(TDomain))!;
-            this.Repository = repository;
-            this.Mapper = mapper;
+            Aggregate = (TDomain)Activator.CreateInstance(typeof(TDomain))!;
+            Repository = repository;
+            Mapper = mapper;
         }
 
         public IEnumerable<TDomain> GetAll()
         {
-            return this.Repository.GetAll();
+            return Repository.GetAll();
         }
 
         public IEnumerable<TDomain> GetEntityListByCriteria(Expression<Func<TDomain, bool>> predicate)
         {
-            return this.Repository.GetEntityListByCriteria(predicate);
+            return Repository.GetEntityListByCriteria(predicate);
         }
     }
 }

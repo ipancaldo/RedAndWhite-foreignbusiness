@@ -46,9 +46,9 @@ namespace RedAndWhite.Domain
                 !string.IsNullOrEmpty(modifyPropertiesProduct.Description))
                 Description = modifyPropertiesProduct.Description;
 
-            //if (this.Image != modifyPropertiesProduct.Image &&
+            //if (Image != modifyPropertiesProduct.Image &&
             //    modifyPropertiesProduct.Image is not null)
-            //    this.Image = modifyPropertiesProduct.Image;
+            //    Image = modifyPropertiesProduct.Image;
         }
 
         public void AssignBrand(Brand brand)

@@ -19,13 +19,13 @@ namespace RedAndWhite.Service.Categories
                                IMapper mapper)
             : base(repository, mapper)
         {
-            this._nullVerifier = nullVerifier;
+            _nullVerifier = nullVerifier;
         }
 
         public Category GetById(GetCategoryById getCategoryById)
         {
             var category = base.Repository.GetEntityByCriteria(GetByIdEvaluator(getCategoryById.CategoryId));
-            this._nullVerifier.IfNullThrowException(category, CategoryType);
+            _nullVerifier.IfNullThrowException(category, CategoryType);
 
             return category;
         }
@@ -35,7 +35,7 @@ namespace RedAndWhite.Service.Categories
         public Category GetByName(CategoryToGet categoryToGet)
         {
             var category = base.Repository.GetEntityByCriteria(GetByNameEvaluator(categoryToGet.CategoryName));
-            this._nullVerifier.IfNullThrowException(category, CategoryType);
+            _nullVerifier.IfNullThrowException(category, CategoryType);
 
             return category;
         }
@@ -43,10 +43,10 @@ namespace RedAndWhite.Service.Categories
         public void Create(CategoryModel newCategoryModel)
         {
             var category = base.Repository.GetEntityByCriteria(GetByNameEvaluator(newCategoryModel.CategoryName));
-            this._nullVerifier.IfExistsThrowException(category, CategoryType);
+            _nullVerifier.IfExistsThrowException(category, CategoryType);
 
-            this.Aggregate.Create(base.Mapper.Map<NewCategory>(newCategoryModel));
-            base.Repository.Add(this.Aggregate);
+            base.Aggregate.Create(base.Mapper.Map<NewCategory>(newCategoryModel));
+            base.Repository.Add(base.Aggregate);
 
             base.Repository.SaveChanges();
         }

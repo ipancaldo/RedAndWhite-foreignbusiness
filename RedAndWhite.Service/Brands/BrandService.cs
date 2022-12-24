@@ -24,8 +24,8 @@ namespace RedAndWhite.Service.Brands
                             IMapper mapper) 
             : base(repository, mapper)
         {
-            this._resultVerifier = resultVerifier;
-            this._categoryDomainService = categoryDomainService;
+            _resultVerifier = resultVerifier;
+            _categoryDomainService = categoryDomainService;
         }
         
         public List<BrandModel> GetAllBrands()
@@ -36,7 +36,7 @@ namespace RedAndWhite.Service.Brands
         public Brand GetById(int id)
         {
             var brand = base.Repository.GetEntityByCriteria(GetByIdEvaluator(id));
-            this._resultVerifier.IfNullThrowException(brand, BrandType);
+            _resultVerifier.IfNullThrowException(brand, BrandType);
 
             return brand;
         }
@@ -46,7 +46,7 @@ namespace RedAndWhite.Service.Brands
         public Brand GetById(GetBrandById id)
         {
             var brand = base.Repository.GetEntityByCriteria(GetByIdEvaluator(id.BrandId));
-            this._resultVerifier.IfNullThrowException(brand, BrandType);
+            _resultVerifier.IfNullThrowException(brand, BrandType);
 
             return brand;
         }
@@ -54,7 +54,7 @@ namespace RedAndWhite.Service.Brands
         public Brand GetByName(NewBrand newBrand)
         {
             var brand = base.Repository.GetEntityByCriteria(GetByNameEvaluator(newBrand.BrandName));
-            this._resultVerifier.IfNullThrowException(brand, BrandType);
+            _resultVerifier.IfNullThrowException(brand, BrandType);
 
             throw new Exception("Brand don't exist.");
         }
@@ -67,10 +67,10 @@ namespace RedAndWhite.Service.Brands
 
         public List<Brand> GetByCategory(GetCategoryByIdModel categoryModel)
         {
-            var category = this._categoryDomainService.GetById(base.Mapper.Map<GetCategoryById>(categoryModel));
+            var category = _categoryDomainService.GetById(base.Mapper.Map<GetCategoryById>(categoryModel));
 
             var brands = base.Repository.GetEntityListByCriteria(GetByCategoryIdEvaluator(category)).ToList();
-            this._resultVerifier.IfEmptyThrowException(brands);
+            _resultVerifier.IfEmptyThrowException(brands);
 
             return brands;
         }
@@ -79,10 +79,10 @@ namespace RedAndWhite.Service.Brands
         public void Create(NewBrandModel newBrandModel)
         {
             var brand = base.Repository.GetEntityByCriteria(GetByNameEvaluator(newBrandModel.BrandName));
-            this._resultVerifier.IfExistsThrowException(brand, BrandType);
+            _resultVerifier.IfExistsThrowException(brand, BrandType);
 
-            this.Aggregate.Create(base.Mapper.Map<NewBrand>(newBrandModel));
-            base.Repository.Add(this.Aggregate);
+            base.Aggregate.Create(base.Mapper.Map<NewBrand>(newBrandModel));
+            base.Repository.Add(base.Aggregate);
 
             base.Repository.SaveChanges();
         }
@@ -91,7 +91,7 @@ namespace RedAndWhite.Service.Brands
         public void Modify(ModifyPropertiesBrand modifyPropertiesBrand)
         {
             var brand = GetById(modifyPropertiesBrand.Id);
-            this._resultVerifier.IfNullThrowException(brand, BrandType);
+            _resultVerifier.IfNullThrowException(brand, BrandType);
 
             brand.Modify(modifyPropertiesBrand);
             base.Repository.SaveChanges();
@@ -100,7 +100,7 @@ namespace RedAndWhite.Service.Brands
         public void Delete(int id)
         {
             var brand = GetById(id);
-            this._resultVerifier.IfNullThrowException(brand, BrandType);
+            _resultVerifier.IfNullThrowException(brand, BrandType);
 
             base.Repository.Delete(brand);
             base.Repository.SaveChanges();
