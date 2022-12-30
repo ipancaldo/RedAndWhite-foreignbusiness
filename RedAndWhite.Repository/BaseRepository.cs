@@ -20,15 +20,17 @@ namespace RedAndWhite.Repository
 
         public IEnumerable<TDomain> GetAll() => DbSet.AsEnumerable<TDomain>();
 
+        public TDomain GetEntityByCriteria(Expression<Func<TDomain, bool>> predicate) => DbSet.FirstOrDefault(predicate)!;
+
         public IEnumerable<TDomain> GetEntityListByCriteria(Expression<Func<TDomain, bool>> predicate) => DbSet.Where(predicate).ToList();
         
         public void Add(TDomain entity) => _redAndWhiteContext.Add(entity);
 
         public void Delete(TDomain entity) => DbSet.Remove(entity);
 
-        public TDomain GetEntityByCriteria(Expression<Func<TDomain, bool>> predicate) => DbSet.FirstOrDefault(predicate)!;
-
         public IEnumerable<TDomain> OrderBy(Expression<Func<TDomain, string>> predicate) => (IEnumerable<TDomain>)DbSet.OrderBy(predicate);
+
+        public IEnumerable<TDomain> OrderByDescending(Expression<Func<TDomain, string>> predicate) => (IEnumerable<TDomain>)DbSet.OrderByDescending(predicate);
 
         public void SaveChanges() => _redAndWhiteContext.SaveChanges();
     }

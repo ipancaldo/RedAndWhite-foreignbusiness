@@ -1,6 +1,7 @@
 ﻿using Microsoft.Extensions.DependencyInjection;
 using RedAndWhite.Repository.Brands;
 using RedAndWhite.Repository.Categories;
+using RedAndWhite.Repository.Informations;
 using RedAndWhite.Repository.Products;
 
 namespace RedAndWhite.Repository
@@ -12,6 +13,7 @@ namespace RedAndWhite.Repository
             services.AddScoped<IProductRepository, ProductRepository>();
             services.AddScoped<IBrandRepository, BrandRepository>();
             services.AddScoped<ICategoryRepository, CategoryRepository>();
+            services.AddScoped<IInformationRepository, InformationRepository>();
 
             return services;
         }

@@ -2,7 +2,6 @@
 using RedAndWhite.Infrastructure.Enums;
 using RedAndWhite.Infrastructure.Loaders;
 using RedAndWhite.Model.Categories;
-using RedAndWhite.Model.Products;
 using RedAndWhite.Service.Products;
 
 namespace RedAndWhite.Users.UI.Controllers

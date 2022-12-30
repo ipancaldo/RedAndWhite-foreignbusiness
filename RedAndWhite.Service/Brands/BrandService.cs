@@ -93,7 +93,8 @@ namespace RedAndWhite.Service.Brands
             var brand = GetById(modifyPropertiesBrand.Id);
             _resultVerifier.IfNullThrowException(brand, BrandType);
 
-            brand.Modify(modifyPropertiesBrand);
+            base.Aggregate = brand;
+            base.Aggregate.Modify(modifyPropertiesBrand);
             base.Repository.SaveChanges();
         }
 

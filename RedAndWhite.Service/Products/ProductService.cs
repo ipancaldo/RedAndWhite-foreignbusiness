@@ -1,10 +1,13 @@
 ﻿using AutoMapper;
+using Microsoft.VisualBasic;
 using RedAndWhite.Domain;
 using RedAndWhite.Domain.DomainServices;
 using RedAndWhite.Domain.ValueObjects.Brand;
 using RedAndWhite.Domain.ValueObjects.Category;
+using RedAndWhite.Domain.ValueObjects.Informations;
 using RedAndWhite.Domain.ValueObjects.Product;
 using RedAndWhite.Model.Categories;
+using RedAndWhite.Model.Informations;
 using RedAndWhite.Model.Products;
 using RedAndWhite.Repository.Products;
 using RedAndWhite.Service.Common;
@@ -80,7 +83,8 @@ namespace RedAndWhite.Service.Products
             var product = GetProductById(modifyPropertiesProduct.Id);
             _resultVerifier.IfNullThrowException(product, ProductType);
 
-            product.ModifyProperties(modifyPropertiesProduct);
+            base.Aggregate = product;
+            base.Aggregate.ModifyProperties(modifyPropertiesProduct);
             base.Repository.SaveChanges();
         }
 
@@ -89,8 +93,10 @@ namespace RedAndWhite.Service.Products
             var product = GetProductById(addOrRemoveProductBrandModel.ProductId);
             _resultVerifier.IfNullThrowException(product, ProductType);
 
+            base.Aggregate = product;
+
             var brand = _brandDomainService.GetById(base.Mapper.Map<GetBrandById>(addOrRemoveProductBrandModel));
-            product.AssignBrand(brand);
+            base.Aggregate.AssignBrand(brand);
 
             base.Repository.SaveChanges();
         }
@@ -100,8 +106,10 @@ namespace RedAndWhite.Service.Products
             var product = GetProductById(addProductBrandModel.ProductId);
             _resultVerifier.IfNullThrowException(product, ProductType);
 
+            base.Aggregate = product;
+
             var brand = _brandDomainService.GetById(base.Mapper.Map<GetBrandById>(addProductBrandModel));
-            product.RemoveBrand(brand);
+            base.Aggregate.RemoveBrand(brand);
 
             base.Repository.SaveChanges();
         }
@@ -111,8 +119,10 @@ namespace RedAndWhite.Service.Products
             var product = GetProductById(assignCategoryModel.ProductId);
             _resultVerifier.IfNullThrowException(product, ProductType);
 
+            base.Aggregate = product;
+
             var category = _categoryDomainService.GetById(base.Mapper.Map<GetCategoryById>(assignCategoryModel));
-            product.AssignCategory(category);
+            base.Aggregate.AssignCategory(category);
 
             base.Repository.SaveChanges();
         }
@@ -122,8 +132,10 @@ namespace RedAndWhite.Service.Products
             var product = GetProductById(removeCategoryFromProductModel.ProductId);
             _resultVerifier.IfNullThrowException(product, ProductType);
 
+            base.Aggregate = product;
+
             var category = _categoryDomainService.GetById(base.Mapper.Map<GetCategoryById>(removeCategoryFromProductModel));
-            product.RemoveCategory(category);
+            base.Aggregate.RemoveCategory(category);
 
             base.Repository.SaveChanges();
         }
