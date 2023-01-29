@@ -1,4 +1,5 @@
-﻿using RedAndWhite.Domain.ValueObjects.Informations;
+﻿using RedAndWhite.Domain.Domains;
+using RedAndWhite.Domain.ValueObjects.Informations;
 using System.ComponentModel.DataAnnotations;
 
 namespace RedAndWhite.Domain
@@ -14,14 +15,14 @@ namespace RedAndWhite.Domain
         [Required]
         public string Text { get; set; }
 
-        public string? Image { get; set; }
+        public virtual List<Image>? Images { get; set; } = new();
 
         public void Create(NewInformation newInformation)
         {
             Title = newInformation.Title;
             Text = newInformation.Text;
-            if (!String.IsNullOrEmpty(newInformation.Image))
-                Image = newInformation.Image;
+            if (newInformation.Images.Any())
+                newInformation.Images.ForEach(img => Images.Add(new Image(img.Image)));
         }
 
         public void ModifyProperties(NewInformation newInformation)
@@ -36,8 +37,7 @@ namespace RedAndWhite.Domain
             if (Text.ToLower() != newInformation.Text.ToLower())
                 Text = newInformation.Text;
 
-            if (!String.IsNullOrEmpty(newInformation.Image))
-                Image = newInformation.Image;
+            //TODO: Make the proper modification of the Images for add/remove
         }
     }
 }

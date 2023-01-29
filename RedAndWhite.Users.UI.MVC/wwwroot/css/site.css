@@ -177,3 +177,12 @@ body.sb-sidenav-toggled #wrapper #sidebar-wrapper {
     top: 6px
 }
 
+.information-image-container {
+    width: 500px;
+    height: 120px;
+}
+
+.information-image-container img{
+    width: 100%;
+    height: auto;
+}

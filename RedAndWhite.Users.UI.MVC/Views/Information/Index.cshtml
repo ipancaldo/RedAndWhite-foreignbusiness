@@ -1,0 +1,31 @@
+﻿@model RedAndWhite.Model.Informations.InformationModel;
+
+<div class="container-fluid mt-4 test">
+    <div class="row mt-2 pb-5">
+        @if(!String.IsNullOrEmpty(Model.Image)){
+            <div class="col-xl-5 col-lg-6 col-xs-12 p-5 information-image-container">
+                <img src="@Model.Image"/>
+            </div>
+        }
+        <div class="col-xl-7 col-lg-6 col-xs-12 p-2 rebecca p-3">
+            <h2>@Model.Title</h2>
+            <p>
+                @Model.Text
+            </p>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-xl-7 col-lg-6 col-xs-12 p-5">
+            <p>
+                @Model.Text
+            </p>
+        </div>
+        @if (!String.IsNullOrEmpty(Model.Image))
+        {
+            <div class="col-xl-5 col-lg-6 col-xs-12 p-5 information-image-container">
+                <img src="@Model.Image" />
+            </div>
+        }
+    </div>
+</div>

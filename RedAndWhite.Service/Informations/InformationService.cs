@@ -1,7 +1,6 @@
 ﻿using AutoMapper;
 using RedAndWhite.Domain;
 using RedAndWhite.Domain.ValueObjects.Informations;
-using RedAndWhite.Domain.ValueObjects.Product;
 using RedAndWhite.Model.Informations;
 using RedAndWhite.Repository.Informations;
 using RedAndWhite.Service.Common;
@@ -58,6 +57,5 @@ namespace RedAndWhite.Service.Informations
             base.Aggregate.ModifyProperties(base.Mapper.Map<NewInformation>(modifyInformationModel));
             base.Repository.SaveChanges();
         }
-
     }
 }
