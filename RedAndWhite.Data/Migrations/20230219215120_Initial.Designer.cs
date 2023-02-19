@@ -11,8 +11,8 @@ using RedAndWhite.Data;
 namespace RedAndWhite.Data.Migrations
 {
     [DbContext(typeof(RedAndWhiteContext))]
-    [Migration("20221217190231_SecondMigration")]
-    partial class SecondMigration
+    [Migration("20230219215120_Initial")]
+    partial class Initial
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -68,6 +68,21 @@ namespace RedAndWhite.Data.Migrations
                     b.ToTable("CategoryProduct");
                 });
 
+            modelBuilder.Entity("ImageInformation", b =>
+                {
+                    b.Property<int>("ImagesId")
+                        .HasColumnType("int");
+
+                    b.Property<int>("InformationsId")
+                        .HasColumnType("int");
+
+                    b.HasKey("ImagesId", "InformationsId");
+
+                    b.HasIndex("InformationsId");
+
+                    b.ToTable("ImageInformation");
+                });
+
             modelBuilder.Entity("RedAndWhite.Domain.Brand", b =>
                 {
                     b.Property<int>("Id")
@@ -116,7 +131,7 @@ namespace RedAndWhite.Data.Migrations
                     b.ToTable("Categories");
                 });
 
-            modelBuilder.Entity("RedAndWhite.Domain.Information", b =>
+            modelBuilder.Entity("RedAndWhite.Domain.Domains.Image", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -124,8 +139,22 @@ namespace RedAndWhite.Data.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
 
-                    b.Property<string>("Image")
+                    b.Property<string>("Img")
+                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("Image");
+                });
+
+            modelBuilder.Entity("RedAndWhite.Domain.Information", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
 
                     b.Property<string>("Text")
                         .IsRequired()
@@ -279,6 +308,21 @@ namespace RedAndWhite.Data.Migrations
                     b.HasOne("RedAndWhite.Domain.Product", null)
                         .WithMany()
                         .HasForeignKey("ProductsId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+                });
+
+            modelBuilder.Entity("ImageInformation", b =>
+                {
+                    b.HasOne("RedAndWhite.Domain.Domains.Image", null)
+                        .WithMany()
+                        .HasForeignKey("ImagesId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("RedAndWhite.Domain.Information", null)
+                        .WithMany()
+                        .HasForeignKey("InformationsId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
                 });

@@ -4,7 +4,7 @@
 
 namespace RedAndWhite.Data.Migrations
 {
-    public partial class ThirdMigration : Migration
+    public partial class Initial : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
