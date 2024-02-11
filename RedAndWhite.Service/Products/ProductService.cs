@@ -1,17 +1,15 @@
 ﻿using AutoMapper;
-using Microsoft.VisualBasic;
 using RedAndWhite.Domain;
 using RedAndWhite.Domain.DomainServices;
 using RedAndWhite.Domain.ValueObjects.Brand;
 using RedAndWhite.Domain.ValueObjects.Category;
-using RedAndWhite.Domain.ValueObjects.Informations;
 using RedAndWhite.Domain.ValueObjects.Product;
+using RedAndWhite.Infrastructure.Enums;
 using RedAndWhite.Model.Categories;
-using RedAndWhite.Model.Informations;
 using RedAndWhite.Model.Products;
+using RedAndWhite.Model.Shared;
 using RedAndWhite.Repository.Products;
 using RedAndWhite.Service.Common;
-using System.Collections.Generic;
 using System.Linq.Expressions;
 
 namespace RedAndWhite.Service.Products
@@ -20,14 +18,14 @@ namespace RedAndWhite.Service.Products
     {
         private readonly IBrandDomainService _brandDomainService;
         private readonly ICategoryDomainService _categoryDomainService;
-        private readonly IResultVerifier _resultVerifier;
+        private readonly IResultVerifierService _resultVerifier;
 
         const string ProductType = "Product";
 
         public ProductService(IProductRepository repository,
                               IBrandDomainService brandDomainService,
                               ICategoryDomainService categoryDomainService,
-                              IResultVerifier resultVerifier,
+                              IResultVerifierService resultVerifier,
                               IMapper mapper)
             : base(repository, mapper)
         {
@@ -41,7 +39,7 @@ namespace RedAndWhite.Service.Products
             return base.Mapper.Map<List<ProductModel>>(base.Repository.GetAll().ToList());
         }
 
-        public Product GetProductById(int id)
+        public Product GetById(int id)
         {
             return base.Repository.GetEntityByCriteria(GetByIdEvaluator(id));
         }
@@ -52,45 +50,58 @@ namespace RedAndWhite.Service.Products
             var category = _categoryDomainService.GetByName(base.Mapper.Map<CategoryToGet>(getProductsByCategoryModel));
 
             var products = base.Repository.GetEntityListByCriteria(GetByCategoryCriteria(category));
-            _resultVerifier.IfEmptyThrowException(products.ToList());
 
             return base.Mapper.Map<List<ProductModel>>(products.ToList());
         }
         private Expression<Func<Product, bool>> GetByCategoryCriteria(Category category) => product => product.Categories.Contains(category);
 
-        public void Create(NewProductModel newProductModel)
+        // GetByBrands
+        //Implement Product by brand as it is done in GetByCategory
+        //Implement the interface
+        //Create a Category and assign a product to that Category
+        //Create a test:
+            //Class name = GetProductTest
+
+
+
+        public async Task<ResultDTO<Product>> Create(NewProductModel newProductModel)
         {
             var product = base.Repository.GetEntityByCriteria(GetByNameEvaluator(newProductModel.Name));
-            _resultVerifier.IfExistsThrowException(product, ProductType);
+
+            var result = _resultVerifier.IfExistsReturnFailed(product);
+            if (result.ResultStatus == ResultStatus.Failed)
+                return result;
 
             base.Aggregate.Create(base.Mapper.Map<NewProduct>(newProductModel));
-            base.Repository.Add(base.Aggregate);
-            base.Repository.SaveChanges();
+            await base.Repository.Add(base.Aggregate);
+            await base.Repository.SaveChanges();
+
+            return result;
         }
         private Expression<Func<Product, bool>> GetByNameEvaluator(string productName) => product => product.Name.ToLower() == productName.ToLower();
 
-        public void Delete(int id)
+        public async Task Delete(int id)
         {
-            var product = GetProductById(id);
+            var product = GetById(id);
             _resultVerifier.IfNullThrowException(product, ProductType);
 
             base.Repository.Delete(product);
-            base.Repository.SaveChanges();
+            await base.Repository.SaveChanges();
         }
 
-        public void ModifyProperties(ModifyPropertiesProduct modifyPropertiesProduct)
+        public async Task Update(ModifyPropertiesProduct modifyPropertiesProduct)
         {
-            var product = GetProductById(modifyPropertiesProduct.Id);
+            var product = GetById(modifyPropertiesProduct.Id);
             _resultVerifier.IfNullThrowException(product, ProductType);
 
             base.Aggregate = product;
             base.Aggregate.ModifyProperties(modifyPropertiesProduct);
-            base.Repository.SaveChanges();
+            await base.Repository.SaveChanges();
         }
 
-        public void AssignBrand(AddOrRemoveProductBrandModel addOrRemoveProductBrandModel)
+        public async Task AssignBrand(AddOrRemoveProductBrandModel addOrRemoveProductBrandModel)
         {
-            var product = GetProductById(addOrRemoveProductBrandModel.ProductId);
+            var product = GetById(addOrRemoveProductBrandModel.ProductId);
             _resultVerifier.IfNullThrowException(product, ProductType);
 
             base.Aggregate = product;
@@ -98,12 +109,12 @@ namespace RedAndWhite.Service.Products
             var brand = _brandDomainService.GetById(base.Mapper.Map<GetBrandById>(addOrRemoveProductBrandModel));
             base.Aggregate.AssignBrand(brand);
 
-            base.Repository.SaveChanges();
+            await base.Repository.SaveChanges();
         }
 
-        public void RemoveBrand(AddOrRemoveProductBrandModel addProductBrandModel)
+        public async Task RemoveBrand(AddOrRemoveProductBrandModel addProductBrandModel)
         {
-            var product = GetProductById(addProductBrandModel.ProductId);
+            var product = GetById(addProductBrandModel.ProductId);
             _resultVerifier.IfNullThrowException(product, ProductType);
 
             base.Aggregate = product;
@@ -111,12 +122,12 @@ namespace RedAndWhite.Service.Products
             var brand = _brandDomainService.GetById(base.Mapper.Map<GetBrandById>(addProductBrandModel));
             base.Aggregate.RemoveBrand(brand);
 
-            base.Repository.SaveChanges();
+            await base.Repository.SaveChanges();
         }
 
-        public void AssignCategory(AssignCategoryModel assignCategoryModel)
+        public async Task AssignCategory(AssignCategoryModel assignCategoryModel)
         {
-            var product = GetProductById(assignCategoryModel.ProductId);
+            var product = GetById(assignCategoryModel.ProductId);
             _resultVerifier.IfNullThrowException(product, ProductType);
 
             base.Aggregate = product;
@@ -124,12 +135,12 @@ namespace RedAndWhite.Service.Products
             var category = _categoryDomainService.GetById(base.Mapper.Map<GetCategoryById>(assignCategoryModel));
             base.Aggregate.AssignCategory(category);
 
-            base.Repository.SaveChanges();
+            await base.Repository.SaveChanges();
         }
 
-        public void RemoveCategory(RemoveCategoryFromProductModel removeCategoryFromProductModel)
+        public async Task RemoveCategory(RemoveCategoryFromProductModel removeCategoryFromProductModel)
         {
-            var product = GetProductById(removeCategoryFromProductModel.ProductId);
+            var product = GetById(removeCategoryFromProductModel.ProductId);
             _resultVerifier.IfNullThrowException(product, ProductType);
 
             base.Aggregate = product;
@@ -137,7 +148,7 @@ namespace RedAndWhite.Service.Products
             var category = _categoryDomainService.GetById(base.Mapper.Map<GetCategoryById>(removeCategoryFromProductModel));
             base.Aggregate.RemoveCategory(category);
 
-            base.Repository.SaveChanges();
+            await base.Repository.SaveChanges();
         }
 
         public List<Product> OrderBy()

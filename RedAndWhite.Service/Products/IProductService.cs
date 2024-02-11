@@ -2,6 +2,7 @@
 using RedAndWhite.Domain.ValueObjects.Product;
 using RedAndWhite.Model.Categories;
 using RedAndWhite.Model.Products;
+using RedAndWhite.Model.Shared;
 
 namespace RedAndWhite.Service.Products
 {
@@ -9,23 +10,23 @@ namespace RedAndWhite.Service.Products
     {
         List<ProductModel> GetAllProducts();
 
-        Product GetProductById(int id);
+        Product GetById(int id);
 
         List<ProductModel> GetByCategory(GetProductsByCategoryModel categoryModel);
 
-        void Create(NewProductModel newProductModel);
+        Task<ResultDTO<Product>> Create(NewProductModel newProductModel);
 
-        void Delete(int id);
+        Task Delete(int id);
 
-        void ModifyProperties(ModifyPropertiesProduct modifyPropertiesProduct);
+        Task Update(ModifyPropertiesProduct modifyPropertiesProduct);
 
-        void AssignBrand(AddOrRemoveProductBrandModel addOrRemoveProductBrandModel);
+        Task AssignBrand(AddOrRemoveProductBrandModel addOrRemoveProductBrandModel);
 
-        void RemoveBrand(AddOrRemoveProductBrandModel addProductBrandModel);
+        Task RemoveBrand(AddOrRemoveProductBrandModel addProductBrandModel);
 
-        void AssignCategory(AssignCategoryModel assignCategoryModel);
+        Task AssignCategory(AssignCategoryModel assignCategoryModel);
 
-        void RemoveCategory(RemoveCategoryFromProductModel removeCategoryFromProductModel);
+        Task RemoveCategory(RemoveCategoryFromProductModel removeCategoryFromProductModel);
 
         List<Product> OrderBy();
     }
