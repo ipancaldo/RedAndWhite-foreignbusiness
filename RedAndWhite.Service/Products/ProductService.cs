@@ -69,7 +69,7 @@ namespace RedAndWhite.Service.Products
             var product = base.Repository.GetEntityByCriteria(GetByNameEvaluator(newProductModel.Name));
 
             var result = _resultVerifier.IfExistsReturnFailed(product);
-            if (result.ResultStatus == ResultStatus.Failed)
+            if (result.ResultStatus == ResultStatusEnum.Failed)
                 return result;
 
             base.Aggregate.Create(base.Mapper.Map<NewProduct>(newProductModel));

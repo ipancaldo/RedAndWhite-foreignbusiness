@@ -10,12 +10,12 @@ namespace RedAndWhite.Service.Informations
 {
     public class InformationService : ServiceBase<Information, IInformationRepository>, IInformationService
     {
-        private readonly IResultVerifier _resultVerifier;
+        private readonly IResultVerifierService _resultVerifier;
 
         const string ProductType = "Information";
 
         public InformationService(IInformationRepository informationRepository,
-                                  IResultVerifier resultVerifier,
+                                  IResultVerifierService resultVerifier,
                                   IMapper mapper) 
             : base(informationRepository, mapper)
         {
@@ -31,31 +31,31 @@ namespace RedAndWhite.Service.Informations
         }
         private Expression<Func<Information, string>> GetByIdToStringCriteria() => information => information.Id.ToString();
 
-        public void Create(NewInformationModel newInformationModel)
+        public async Task Create(NewInformationModel newInformationModel)
         {
             base.Aggregate.Create(base.Mapper.Map<NewInformation>(newInformationModel));
-            base.Repository.Add(base.Aggregate);
-            base.Repository.SaveChanges();
+            await base.Repository.Add(base.Aggregate);
+            await base.Repository.SaveChanges();
         }
 
-        public void Delete(int id)
+        public async Task Delete(int id)
         {
             var information = base.Repository.GetEntityByCriteria(GetById(id));
             _resultVerifier.IfNullThrowException(information, ProductType);
 
             base.Repository.Delete(information);
-            base.Repository.SaveChanges();
+            await base.Repository.SaveChanges();
         }
         private Expression<Func<Information, bool>> GetById(int id) => information => information.Id == id;
 
-        public void ModifyProperties(ModifyInformationModel modifyInformationModel)
+        public async Task Update(ModifyInformationModel modifyInformationModel)
         {
             var information = base.Repository.GetEntityByCriteria(GetById(modifyInformationModel.Id));
             _resultVerifier.IfNullThrowException(information, ProductType);
 
             base.Aggregate = information;
-            base.Aggregate.ModifyProperties(base.Mapper.Map<NewInformation>(modifyInformationModel));
-            base.Repository.SaveChanges();
+            base.Aggregate.UpdateProperties(base.Mapper.Map<NewInformation>(modifyInformationModel));
+            await base.Repository.SaveChanges();
         }
     }
 }

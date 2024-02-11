@@ -24,7 +24,7 @@ namespace RedAndWhite.Repository
 
         public IEnumerable<TDomain> GetEntityListByCriteria(Expression<Func<TDomain, bool>> predicate) => DbSet.Where(predicate).ToList();
         
-        public void Add(TDomain entity) => _redAndWhiteContext.Add(entity);
+        public async Task Add(TDomain entity) => await _redAndWhiteContext.AddAsync(entity);
 
         public void Delete(TDomain entity) => DbSet.Remove(entity);
 
@@ -32,6 +32,6 @@ namespace RedAndWhite.Repository
 
         public IEnumerable<TDomain> OrderByDescending(Expression<Func<TDomain, string>> predicate) => (IEnumerable<TDomain>)DbSet.OrderByDescending(predicate);
 
-        public void SaveChanges() => _redAndWhiteContext.SaveChanges();
+        public async Task SaveChanges() => await _redAndWhiteContext.SaveChangesAsync();
     }
 }

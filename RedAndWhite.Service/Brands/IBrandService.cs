@@ -2,6 +2,7 @@
 using RedAndWhite.Domain.ValueObjects.Brand;
 using RedAndWhite.Model.Brands;
 using RedAndWhite.Model.Categories;
+using RedAndWhite.Model.Shared;
 
 namespace RedAndWhite.Service.Brands
 {
@@ -13,11 +14,11 @@ namespace RedAndWhite.Service.Brands
 
         List<Brand> GetByCategory(GetCategoryByIdModel categoryModel);
 
-        void Create(NewBrandModel newBrandModel);
+        Task<ResultDTO<Brand>> Create(NewBrandModel newBrandModel);
 
-        void Modify(ModifyPropertiesBrand modifyPropertiesBrand);
+        Task Update(ModifyPropertiesBrand modifyPropertiesBrand);
 
-        void Delete(int id);
+        Task Delete(int id);
 
         List<Brand> OrderBy();
     }

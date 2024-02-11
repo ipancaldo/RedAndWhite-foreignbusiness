@@ -14,9 +14,15 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\RedAndWhite.Domain\RedAndWhite.Domain.csproj" />
     <ProjectReference Include="..\RedAndWhite.Infrastructure\RedAndWhite.Infrastructure.csproj" />
     <ProjectReference Include="..\RedAndWhite.Model\RedAndWhite.Model.csproj" />
     <ProjectReference Include="..\RedAndWhite.Repository\RedAndWhite.Repository.csproj" />
   </ItemGroup>
+
+	<PropertyGroup>
+		<Nullable>enable</Nullable>
+		<WarningsAsErrors>CS8619</WarningsAsErrors>
+	</PropertyGroup>
 
 </Project>

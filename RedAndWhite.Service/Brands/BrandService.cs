@@ -3,8 +3,10 @@ using RedAndWhite.Domain;
 using RedAndWhite.Domain.DomainServices;
 using RedAndWhite.Domain.ValueObjects.Brand;
 using RedAndWhite.Domain.ValueObjects.Category;
+using RedAndWhite.Infrastructure.Enums;
 using RedAndWhite.Model.Brands;
 using RedAndWhite.Model.Categories;
+using RedAndWhite.Model.Shared;
 using RedAndWhite.Repository.Brands;
 using RedAndWhite.Service.Common;
 using System.Linq.Expressions;
@@ -15,19 +17,19 @@ namespace RedAndWhite.Service.Brands
     {
         const string BrandType = "Brand";
 
-        private readonly IResultVerifier _resultVerifier;
+        private readonly IResultVerifierService _resultVerifier;
         private readonly ICategoryDomainService _categoryDomainService;
 
         public BrandService(IBrandRepository repository,
                             ICategoryDomainService categoryDomainService,
-                            IResultVerifier resultVerifier,
-                            IMapper mapper) 
+                            IResultVerifierService resultVerifier,
+                            IMapper mapper)
             : base(repository, mapper)
         {
             _resultVerifier = resultVerifier;
             _categoryDomainService = categoryDomainService;
         }
-        
+
         public List<BrandModel> GetAllBrands()
         {
             return base.Mapper.Map<List<BrandModel>>(base.Repository.GetAll().ToList());
@@ -70,41 +72,43 @@ namespace RedAndWhite.Service.Brands
             var category = _categoryDomainService.GetById(base.Mapper.Map<GetCategoryById>(categoryModel));
 
             var brands = base.Repository.GetEntityListByCriteria(GetByCategoryIdEvaluator(category)).ToList();
-            _resultVerifier.IfEmptyThrowException(brands);
-
             return brands;
         }
         private Expression<Func<Brand, bool>> GetByCategoryIdEvaluator(Category category) => brand => brand.Categories.Contains(category);
 
-        public void Create(NewBrandModel newBrandModel)
+        public async Task<ResultDTO<Brand>> Create(NewBrandModel newBrandModel)
         {
             var brand = base.Repository.GetEntityByCriteria(GetByNameEvaluator(newBrandModel.BrandName));
-            _resultVerifier.IfExistsThrowException(brand, BrandType);
+
+            var resultDTO = _resultVerifier.IfExistsReturnFailed(brand);
+            if (resultDTO.ResultStatus == ResultStatusEnum.Failed)
+                return resultDTO;
 
             base.Aggregate.Create(base.Mapper.Map<NewBrand>(newBrandModel));
-            base.Repository.Add(base.Aggregate);
+            await base.Repository.Add(base.Aggregate);
+            await base.Repository.SaveChanges();
 
-            base.Repository.SaveChanges();
+            return resultDTO;
         }
         private Expression<Func<Brand, bool>> GetByNameEvaluator(string brandName) => brand => brand.Name.ToLower() == brandName.ToLower();
 
-        public void Modify(ModifyPropertiesBrand modifyPropertiesBrand)
+        public async Task Update(ModifyPropertiesBrand modifyPropertiesBrand)
         {
             var brand = GetById(modifyPropertiesBrand.Id);
             _resultVerifier.IfNullThrowException(brand, BrandType);
 
             base.Aggregate = brand;
             base.Aggregate.Modify(modifyPropertiesBrand);
-            base.Repository.SaveChanges();
+            await base.Repository.SaveChanges();
         }
 
-        public void Delete(int id)
+        public async Task Delete(int id)
         {
             var brand = GetById(id);
             _resultVerifier.IfNullThrowException(brand, BrandType);
 
             base.Repository.Delete(brand);
-            base.Repository.SaveChanges();
+            await base.Repository.SaveChanges();
         }
 
         public List<Brand> OrderBy()

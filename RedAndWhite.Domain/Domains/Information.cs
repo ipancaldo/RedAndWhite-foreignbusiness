@@ -25,7 +25,7 @@ namespace RedAndWhite.Domain
                 newInformation.Images.ForEach(img => Images.Add(new Image(img.Image)));
         }
 
-        public void ModifyProperties(NewInformation newInformation)
+        public void UpdateProperties(NewInformation newInformation)
         {
             if (newInformation.Title.Count() < 2)
                 throw new Exception($"The title cannot be less than 2 characters.");

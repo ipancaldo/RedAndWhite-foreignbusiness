@@ -16,7 +16,7 @@ namespace RedAndWhite.Service
             services.AddScoped<IInformationService, InformationService>();
             services.RegisterAsImplementedInterfaces<BrandService>(ServiceLifetime.Scoped);
             services.RegisterAsImplementedInterfaces<CategoryService>(ServiceLifetime.Scoped);
-            services.AddScoped<IResultVerifier, ResultVerifier>();
+            services.AddScoped<IResultVerifierService, ResultVerifierService>();
 
             return services;
         }

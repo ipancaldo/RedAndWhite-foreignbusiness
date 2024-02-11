@@ -11,11 +11,11 @@ namespace RedAndWhite.Service.Categories
 {
     public class CategoryService : ServiceBase<Category, ICategoryRepository>, ICategoryService, ICategoryDomainService
     {
-        private readonly IResultVerifier _nullVerifier;
+        private readonly IResultVerifierService _nullVerifier;
         const string CategoryType = "Category";
 
         public CategoryService(ICategoryRepository repository,
-                               IResultVerifier nullVerifier,
+                               IResultVerifierService nullVerifier,
                                IMapper mapper)
             : base(repository, mapper)
         {
@@ -40,15 +40,15 @@ namespace RedAndWhite.Service.Categories
             return category;
         }
 
-        public void Create(CategoryModel newCategoryModel)
+        public async Task Create(CategoryModel newCategoryModel)
         {
             var category = base.Repository.GetEntityByCriteria(GetByNameEvaluator(newCategoryModel.CategoryName));
-            _nullVerifier.IfExistsThrowException(category, CategoryType);
+            //_nullVerifier.IfExistsThrowException(category, CategoryType);
 
             base.Aggregate.Create(base.Mapper.Map<NewCategory>(newCategoryModel));
-            base.Repository.Add(base.Aggregate);
+            await base.Repository.Add(base.Aggregate);
 
-            base.Repository.SaveChanges();
+            await base.Repository.SaveChanges();
         }
 
         private Expression<Func<Category, bool>> GetByNameEvaluator(string categoryName) => category => category.Name.ToLower() == categoryName.ToLower();
