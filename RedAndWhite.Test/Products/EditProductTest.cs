@@ -13,7 +13,7 @@ namespace RedAndWhite.Test
         {
             _productService = _serviceProvider.GetRequiredService<IProductService>();
         }
-
+        //TEST
         private const string _productName = "Test product name";
         private const string _productDescription = "Test product description";
         private const string _productNameEdited = "Test product name edited";
