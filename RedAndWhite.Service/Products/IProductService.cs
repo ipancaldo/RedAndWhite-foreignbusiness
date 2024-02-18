@@ -9,7 +9,7 @@ namespace RedAndWhite.Service.Products
     {
         List<ProductModel> GetAllProducts();
 
-        Product GetById(int id);
+        Task<Product> GetById(int id);
 
         Task<List<ProductModel>> GetByCategoryId(GetProductByIdModel categoryModel);
 

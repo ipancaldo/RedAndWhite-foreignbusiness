@@ -5,12 +5,10 @@ using RedAndWhite.Domain.ValueObjects.Brand;
 using RedAndWhite.Domain.ValueObjects.Category;
 using RedAndWhite.Domain.ValueObjects.Product;
 using RedAndWhite.Infrastructure.Enums;
-using RedAndWhite.Model.Brands;
 using RedAndWhite.Model.Products;
 using RedAndWhite.Model.Shared;
 using RedAndWhite.Repository.Products;
 using RedAndWhite.Service.Common;
-using System.Linq;
 using System.Linq.Expressions;
 
 namespace RedAndWhite.Service.Products
@@ -40,9 +38,9 @@ namespace RedAndWhite.Service.Products
             return base.Mapper.Map<List<ProductModel>>(base.Repository.GetAll().ToList());
         }
 
-        public Product GetById(int id)
+        public async Task<Product> GetById(int id)
         {
-            return base.Repository.GetEntityByCriteria(GetByIdEvaluator(id));
+            return await base.Repository.GetEntityByCriteria(GetByIdEvaluator(id));
         }
         private Expression<Func<Product, bool>> GetByIdEvaluator(int id) => user => user.Id.Equals(id);
 
@@ -78,7 +76,7 @@ namespace RedAndWhite.Service.Products
 
         public async Task<ResultDTO<Product>> Create(NewProductModel newProductModel)
         {
-            var product = base.Repository.GetEntityByCriteria(GetByNameEvaluator(newProductModel.Name));
+            var product = await base.Repository.GetEntityByCriteria(GetByNameEvaluator(newProductModel.Name));
 
             var result = _resultVerifier.IfExistsReturnFailed(product);
             if (result.ResultStatus == ResultStatusEnum.Failed)
@@ -94,7 +92,7 @@ namespace RedAndWhite.Service.Products
 
         public async Task Delete(int id)
         {
-            var product = GetById(id);
+            var product = await GetById(id);
             _resultVerifier.IfNullThrowException(product, ProductType);
 
             base.Repository.Delete(product);
@@ -103,7 +101,7 @@ namespace RedAndWhite.Service.Products
 
         public async Task Update(ModifyPropertiesProduct modifyPropertiesProduct)
         {
-            var product = GetById(modifyPropertiesProduct.Id);
+            var product = await GetById(modifyPropertiesProduct.Id);
             _resultVerifier.IfNullThrowException(product, ProductType);
 
             base.Aggregate = product;
@@ -113,7 +111,7 @@ namespace RedAndWhite.Service.Products
 
         public async Task AssignBrand(AddOrRemoveProductBrandModel addOrRemoveProductBrandModel)
         {
-            var product = GetById(addOrRemoveProductBrandModel.ProductId);
+            var product = await GetById(addOrRemoveProductBrandModel.ProductId);
             _resultVerifier.IfNullThrowException(product, ProductType);
 
             base.Aggregate = product;
@@ -126,7 +124,7 @@ namespace RedAndWhite.Service.Products
 
         public async Task RemoveBrand(AddOrRemoveProductBrandModel addProductBrandModel)
         {
-            var product = GetById(addProductBrandModel.ProductId);
+            var product = await GetById(addProductBrandModel.ProductId);
             _resultVerifier.IfNullThrowException(product, ProductType);
 
             base.Aggregate = product;
@@ -139,7 +137,7 @@ namespace RedAndWhite.Service.Products
 
         public async Task AssignCategory(AssignCategoryModel assignCategoryModel)
         {
-            var product = GetById(assignCategoryModel.ProductId);
+            var product = await GetById(assignCategoryModel.ProductId);
             _resultVerifier.IfNullThrowException(product, ProductType);
 
             base.Aggregate = product;
@@ -152,7 +150,7 @@ namespace RedAndWhite.Service.Products
 
         public async Task RemoveCategory(RemoveCategoryFromProductModel removeCategoryFromProductModel)
         {
-            var product = GetById(removeCategoryFromProductModel.ProductId);
+            var product = await GetById(removeCategoryFromProductModel.ProductId);
             _resultVerifier.IfNullThrowException(product, ProductType);
 
             base.Aggregate = product;

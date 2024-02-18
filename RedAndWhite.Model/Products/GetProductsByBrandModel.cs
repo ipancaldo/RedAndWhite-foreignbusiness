@@ -1,14 +1,8 @@
 ﻿using RedAndWhite.Domain.ValueObjects.Brand;
-using RedAndWhite.Domain.ValueObjects.Category;
 using RedAndWhite.Infrastructure.Loaders;
 using RedAndWhite.Infrastructure.Mapping;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
-namespace RedAndWhite.Model.Brands
+namespace RedAndWhite.Model.Products
 {
     public class GetProductsByBrandModel : ModelBase, IMapFrom<BrandToGet>
     {
