@@ -2,7 +2,7 @@
 using RedAndWhite.Infrastructure.Loaders;
 using RedAndWhite.Infrastructure.Mapping;
 
-namespace RedAndWhite.Model.Categories
+namespace RedAndWhite.Model.Products
 {
     public class GetProductsByCategoryModel : ModelBase, IMapFrom<CategoryToGet>
     {

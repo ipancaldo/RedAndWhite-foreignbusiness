@@ -12,7 +12,7 @@ namespace RedAndWhite.Service.Brands
 
         Brand GetById(int id);
 
-        List<Brand> GetByCategory(GetCategoryByIdModel categoryModel);
+        Task<List<Brand>> GetByCategory(GetCategoryByIdModel categoryModel);
 
         Task<ResultDTO<Brand>> Create(NewBrandModel newBrandModel);
 

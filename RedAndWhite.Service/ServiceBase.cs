@@ -26,9 +26,9 @@ namespace RedAndWhite.Service
             return Repository.GetAll();
         }
 
-        public IEnumerable<TDomain> GetEntityListByCriteria(Expression<Func<TDomain, bool>> predicate)
+        public async Task<IEnumerable<TDomain>> GetEntityListByCriteria(Expression<Func<TDomain, bool>> predicate)
         {
-            return Repository.GetEntityListByCriteria(predicate);
+            return await Repository.GetEntityListByCriteria(predicate);
         }
     }
 }

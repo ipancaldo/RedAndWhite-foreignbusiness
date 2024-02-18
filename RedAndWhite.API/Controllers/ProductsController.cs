@@ -38,11 +38,11 @@ namespace RedAndWhite.API.Controllers
         [ProducesDefaultResponseType(typeof(ProductModel))]
         [HttpGet]
         [Route("getproductsbycategory")]
-        public List<ProductModel> GetByCategory(string category)
+        public async Task<List<ProductModel>> GetByCategory(int categoryId)
         {
             try
             {
-                return _productService.GetByCategory(_modelLoader.CreateModel<GetProductsByCategoryModel>(new object[] { category }));
+                return await _productService.GetByCategoryId(_modelLoader.CreateModel<GetProductByIdModel>(new object[] { categoryId }));
             }
             catch (Exception ex)
             {

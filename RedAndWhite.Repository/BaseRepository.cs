@@ -22,7 +22,7 @@ namespace RedAndWhite.Repository
 
         public TDomain GetEntityByCriteria(Expression<Func<TDomain, bool>> predicate) => DbSet.FirstOrDefault(predicate)!;
 
-        public IEnumerable<TDomain> GetEntityListByCriteria(Expression<Func<TDomain, bool>> predicate) => DbSet.Where(predicate).ToList();
+        public async Task<IEnumerable<TDomain>> GetEntityListByCriteria(Expression<Func<TDomain, bool>> predicate) => await DbSet.Where(predicate).ToListAsync();
         
         public async Task Add(TDomain entity) => await _redAndWhiteContext.AddAsync(entity);
 

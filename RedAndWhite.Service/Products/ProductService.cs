@@ -5,11 +5,12 @@ using RedAndWhite.Domain.ValueObjects.Brand;
 using RedAndWhite.Domain.ValueObjects.Category;
 using RedAndWhite.Domain.ValueObjects.Product;
 using RedAndWhite.Infrastructure.Enums;
-using RedAndWhite.Model.Categories;
+using RedAndWhite.Model.Brands;
 using RedAndWhite.Model.Products;
 using RedAndWhite.Model.Shared;
 using RedAndWhite.Repository.Products;
 using RedAndWhite.Service.Common;
+using System.Linq;
 using System.Linq.Expressions;
 
 namespace RedAndWhite.Service.Products
@@ -45,23 +46,34 @@ namespace RedAndWhite.Service.Products
         }
         private Expression<Func<Product, bool>> GetByIdEvaluator(int id) => user => user.Id.Equals(id);
 
-        public List<ProductModel> GetByCategory(GetProductsByCategoryModel getProductsByCategoryModel)
+        public async Task<List<ProductModel>> GetByCategoryId(GetProductByIdModel getProductByIdModel)
         {
-            var category = _categoryDomainService.GetByName(base.Mapper.Map<CategoryToGet>(getProductsByCategoryModel));
+            var category = _categoryDomainService.GetById(base.Mapper.Map<GetCategoryById>(getProductByIdModel));
 
-            var products = base.Repository.GetEntityListByCriteria(GetByCategoryCriteria(category));
+            var products = await base.Repository.GetEntityListByCriteria(GetByCategoryCriteria(category));
 
             return base.Mapper.Map<List<ProductModel>>(products.ToList());
         }
         private Expression<Func<Product, bool>> GetByCategoryCriteria(Category category) => product => product.Categories.Contains(category);
 
-        // GetByBrands
+
+        // GetByBrands => put it on the IService
+        public async Task<List<ProductModel>> GetByBrand(GetProductsByBrandModel getProductsByBrandModel)
+        {
+            var brand = _brandDomainService.GetByName(base.Mapper.Map<NewBrand>(getProductsByBrandModel));
+
+            var products = await base.Repository.GetEntityListByCriteria(GetByBrandCriteria(brand));
+
+            return base.Mapper.Map<List<ProductModel>>(products.ToList());
+        }
+
+        private Expression<Func<Product, bool>> GetByBrandCriteria(Brand brand) => product => product.Brands.Contains(brand);
+
         //Implement Product by brand as it is done in GetByCategory
         //Implement the interface
         //Create a Category and assign a product to that Category
         //Create a test:
-            //Class name = GetProductTest
-
+        //Class name = GetProductTest
 
 
         public async Task<ResultDTO<Product>> Create(NewProductModel newProductModel)

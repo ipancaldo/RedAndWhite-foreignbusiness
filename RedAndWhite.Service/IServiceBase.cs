@@ -6,6 +6,6 @@ namespace RedAndWhite.Service
     {
         IEnumerable<TDomain> GetAll();
 
-        IEnumerable<TDomain> GetEntityListByCriteria(Expression<Func<TDomain, bool>> predicate);
+        Task<IEnumerable<TDomain>> GetEntityListByCriteria(Expression<Func<TDomain, bool>> predicate);
     }
 }

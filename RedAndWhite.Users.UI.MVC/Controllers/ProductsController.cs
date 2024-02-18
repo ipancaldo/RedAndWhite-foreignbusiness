@@ -1,7 +1,7 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using RedAndWhite.Infrastructure.Enums;
 using RedAndWhite.Infrastructure.Loaders;
-using RedAndWhite.Model.Categories;
+using RedAndWhite.Model.Products;
 using RedAndWhite.Service.Products;
 
 namespace RedAndWhite.Users.UI.Controllers
@@ -22,12 +22,12 @@ namespace RedAndWhite.Users.UI.Controllers
             ViewBag.Categories = Categories.Cookies;
         }
 
-        public IActionResult Index(string? category)
+        public async Task<IActionResult> Index(int? categoryId)
         {
             try
             {
-                if (!string.IsNullOrEmpty(category))
-                    return View(_productService.GetByCategory(_modelLoader.CreateModel<GetProductsByCategoryModel>(new object[] { category })));
+                if (categoryId.HasValue)
+                    return View(await _productService.GetByCategoryId(_modelLoader.CreateModel<GetProductByIdModel>(new object[] { categoryId })));
                 else
                     return View(_productService.GetAllProducts());
             }

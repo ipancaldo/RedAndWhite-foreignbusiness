@@ -44,7 +44,6 @@ namespace RedAndWhite.Service.Brands
         }
         private Expression<Func<Brand, bool>> GetByIdEvaluator(int id) => brand => brand.Id.Equals(id);
 
-
         public Brand GetById(GetBrandById id)
         {
             var brand = base.Repository.GetEntityByCriteria(GetByIdEvaluator(id.BrandId));
@@ -56,9 +55,9 @@ namespace RedAndWhite.Service.Brands
         public Brand GetByName(NewBrand newBrand)
         {
             var brand = base.Repository.GetEntityByCriteria(GetByNameEvaluator(newBrand.BrandName));
-            _resultVerifier.IfNullThrowException(brand, BrandType);
+            _resultVerifier.IfNullThrowException(brand, BrandType); //TODO: CORRECT
 
-            throw new Exception("Brand don't exist.");
+            throw new Exception("Brand don't exist."); //TODO: CORRECT
         }
 
         //public List<Brand> GetByIds(GetBrandsById id)
@@ -67,12 +66,11 @@ namespace RedAndWhite.Service.Brands
         //}
         //private Expression<Func<Brand, bool>> GetByIdsExpression(List<int> ids) => brand => ids.Any(b => brand.Id == b);                
 
-        public List<Brand> GetByCategory(GetCategoryByIdModel categoryModel)
+        public async Task<List<Brand>> GetByCategory(GetCategoryByIdModel categoryModel)
         {
             var category = _categoryDomainService.GetById(base.Mapper.Map<GetCategoryById>(categoryModel));
 
-            var brands = base.Repository.GetEntityListByCriteria(GetByCategoryIdEvaluator(category)).ToList();
-            return brands;
+            return (await base.Repository.GetEntityListByCriteria(GetByCategoryIdEvaluator(category))).ToList();
         }
         private Expression<Func<Brand, bool>> GetByCategoryIdEvaluator(Category category) => brand => brand.Categories.Contains(category);
 

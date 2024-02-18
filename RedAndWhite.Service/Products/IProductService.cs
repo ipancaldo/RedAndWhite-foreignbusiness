@@ -1,6 +1,5 @@
 ﻿using RedAndWhite.Domain;
 using RedAndWhite.Domain.ValueObjects.Product;
-using RedAndWhite.Model.Categories;
 using RedAndWhite.Model.Products;
 using RedAndWhite.Model.Shared;
 
@@ -12,7 +11,7 @@ namespace RedAndWhite.Service.Products
 
         Product GetById(int id);
 
-        List<ProductModel> GetByCategory(GetProductsByCategoryModel categoryModel);
+        Task<List<ProductModel>> GetByCategoryId(GetProductByIdModel categoryModel);
 
         Task<ResultDTO<Product>> Create(NewProductModel newProductModel);
 

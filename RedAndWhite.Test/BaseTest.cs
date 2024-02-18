@@ -1,6 +1,7 @@
 ﻿using AutoMapper;
 using Microsoft.Extensions.DependencyInjection;
 using RedAndWhite.Data;
+using RedAndWhite.Infrastructure.Loaders;
 using RedAndWhite.Infrastructure.Mapping;
 using RedAndWhite.Repository.Brands;
 using RedAndWhite.Repository.Categories;
@@ -62,6 +63,8 @@ namespace RedAndWhite.Test
             serviceCollection.AddScoped<IBrandRepository, BrandRepository>();
             serviceCollection.AddScoped<ICategoryRepository, CategoryRepository>();
             serviceCollection.AddScoped<IInformationRepository, InformationRepository>();
+
+            serviceCollection.AddScoped<IModelLoader, ModelLoader>();
 
             return serviceCollection.BuildServiceProvider();
         }
