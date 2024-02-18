@@ -3,21 +3,22 @@ using RedAndWhite.Service.Products;
 using Microsoft.Extensions.DependencyInjection;
 using RedAndWhite.Domain.ValueObjects.Product;
 
-namespace RedAndWhite.Test
+namespace RedAndWhite.Test.Products
 {
-    public class EeditProductTest : BaseTest
+    public class EditProductTest : BaseTest
     {
         private readonly IProductService _productService;
 
-        public EeditProductTest(ServiceProviderFixture serviceProviderFixture) : base(serviceProviderFixture)
-        {
-            _productService = _serviceProvider.GetRequiredService<IProductService>();
-        }
         //TEST
         private const string _productName = "Test product name";
         private const string _productDescription = "Test product description";
         private const string _productNameEdited = "Test product name edited";
         private const string _productDescriptionEdited = "Test product description edited";
+
+        public EditProductTest(ServiceProviderFixture serviceProviderFixture) : base(serviceProviderFixture)
+        {
+            _productService = _serviceProvider.GetRequiredService<IProductService>();
+        }
 
         [Fact]
         public async Task Should_Edit_Product()

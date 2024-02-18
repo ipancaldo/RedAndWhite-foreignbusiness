@@ -2,19 +2,19 @@
 using RedAndWhite.Service.Products;
 using Microsoft.Extensions.DependencyInjection;
 
-namespace RedAndWhite.Test
+namespace RedAndWhite.Test.Products
 {
-    public class CreateProductTest : BaseTest
+    public class CreateProductTests : BaseTest
     {
         private readonly IProductService _productService;
 
-        public CreateProductTest(ServiceProviderFixture serviceProviderFixture) : base(serviceProviderFixture)
+        private const string _productName = "Test product name";
+        private const string _productDescription = "Test product description";
+
+        public CreateProductTests(ServiceProviderFixture serviceProviderFixture) : base(serviceProviderFixture)
         {
             _productService = _serviceProvider.GetRequiredService<IProductService>();
         }
-
-        private const string _productName = "Test product name";
-        private const string _productDescription = "Test product description";
 
         [Fact]
         public async Task Should_Create_New_Product()
